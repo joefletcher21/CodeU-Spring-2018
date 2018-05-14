@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodeU Chat App</title>
+  <title>The Chat in the Hat</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -36,7 +36,7 @@
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-      <h1>About the CodeU Chat App</h1>
+      <h1>About The Chat in the Hat App</h1>
       <p>
         The Chat in the Hat is designed by:
       </p>
