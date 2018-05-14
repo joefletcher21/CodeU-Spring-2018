@@ -42,22 +42,21 @@
       </p>
 
       <ul>
-        <li><strong>Blair Bucshon:</strong> Blair is finishing up her sophomore year at Cornell University.</li>
-        <li><strong> She is orginially from Indiana but now lives in Washington DC.
+        <li><strong>Blair Bucshon:</strong> Blair is finishing up her sophomore year at Cornell University.
+          She is orginially from Indiana but now lives in Washington DC.
           Blair really enjoys photography and hopes to be able to find 
           some new places to take photos this summer! </li>
           
-        <li><strong>Hafsah Hanif:</strong> Hafsah is a rising junior at Smith College.</li>
-        <li><strong> She studies Computer Science and Government, and hopes to attend law school in the future. 
+        <li><strong>Hafsah Hanif:</strong> Hafsah is a rising junior at Smith College.
+          She studies Computer Science and Government, and hopes to attend law school in the future. 
           Hafsah really enjoys playing tennis and hiking! </li>
         
-        <li><strong>Joseph Fletcher (Joe):</strong> Joe is a rising sophomore at Howard University.</li>
-        <li><strong> He will be spending his summer in Washington DC and Massachusetts. </li>
+        <li><strong>Joseph Fletcher (Joe):</strong> Joe is a rising sophomore at Howard University.
+          He loves music, photography and being active.
+          Joe will be spending his summer in Washington DC and Massachusetts. </li>
           
           
-        <li><strong>Customization:</strong> Our goals for The Chat in the Hat is to 
-        bring safe and secure messaging between friends. Long distance communication
-        is very important, and we hope to address this need! </li>
+        <li><strong>Our goals:</strong> To bring safe and secure messaging between friends! </li>
       </ul>
 
       <p>
