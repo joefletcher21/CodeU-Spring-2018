@@ -38,31 +38,29 @@
 
       <h1>About the CodeU Chat App</h1>
       <p>
-        This is an example chat application designed to be a starting point
-        for your CodeU project team work. Here's some stuff to think about:
+        The Chat in the Hat is designed by:
       </p>
 
       <ul>
-        <li><strong>Algorithms and data structures:</strong> We've made the app
-            and the code as simple as possible. You will have to extend the
-            existing data structures to support your enhancements to the app,
-            and also make changes for performance and scalability as your app
-            increases in complexity.</li>
-        <li><strong>Look and feel:</strong> The focus of CodeU is on the Java
-          side of things, but if you're particularly interested you might use
-          HTML, CSS, and JavaScript to make the chat app prettier.</li>
-        <li><strong>Customization:</strong> Think about a group you care about.
-          What needs do they have? How could you help? Think about technical
-          requirements, privacy concerns, and accessibility and
-          internationalization.</li>
+        <li><strong>Blair Bucshon:</strong> Blair is finishing up her sophomore year at Cornell University.</li>
+        <li><strong> She is orginially from Indiana but now lives in Washington DC.
+          Blair really enjoys photography and hopes to be able to find 
+          some new places to take photos this summer! </li>
+          
+        <li><strong>Hafsah Hanif:</strong> Hafsah is a rising junior at Smith College.</li>
+        <li><strong> She studies Computer Science and Government, and hopes to attend law school in the future. 
+          Hafsah really enjoys playing tennis and hiking! </li>
+        
+        <li><strong>Joseph Fletcher (Joe):</strong> Joe is a rising sophomore at Howard University.</li>
+        <li><strong> He will be spending his summer in Washington DC and Massachusetts. </li>
+          
+          
+        <li><strong>Customization:</strong> Our goals for The Chat in the Hat is to 
+        bring safe and secure messaging between friends. Long distance communication
+        is very important, and we hope to address this need! </li>
       </ul>
 
       <p>
-        This is your code now. Get familiar with it and get comfortable
-        working with your team to plan and make changes. Start by updating the
-        homepage and this about page to tell your users more about your team.
-        This page should also be used to describe the features and improvements
-        you've added.
       </p>
     </div>
   </div>
