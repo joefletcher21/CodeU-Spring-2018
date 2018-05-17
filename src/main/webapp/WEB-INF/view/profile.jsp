@@ -11,7 +11,7 @@
   limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Login" %>
+<%@ page import="codeu.model.data.Profile" %>
 
 <!DOCTYPE html>
 <html>
