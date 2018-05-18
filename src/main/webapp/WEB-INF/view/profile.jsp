@@ -11,7 +11,7 @@
   limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Profile" %>
+<%@ page import="codeu.model.data.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,6 +39,10 @@
     <% } %>
 
     <% if(request.getSession().getAttribute("user") != null){ %>
+        <h1>This is your profile page!></h1>
+    <% } else {
+
+    }%>
       <%-- <h1>New Conversation</h1>
       <form action="/conversations" method="POST">
           <div class="form-group">
