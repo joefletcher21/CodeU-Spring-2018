@@ -43,29 +43,7 @@
     <% } else {
 
     }%>
-      <%-- <h1>New Conversation</h1>
-      <form action="/conversations" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="conversationTitle">
-        </div>
-
-        <button type="submit">Create</button>
-      </form> --%>
-
-
-      <hr/>
-    <% } %>
-    <%-- //if user.equals("user") = this is your Profile
-    // else: this is "user's" profile --%>
-    <h1>Conversations</h1>
-
-    <%
-    String user = request.getSession().getAttribute("user");
-    %>
-      <p>This is your page.</p>
-    %>
-    <hr/>
+      
   </div>
 </body>
 </html>
