@@ -19,14 +19,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Conversations</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
-    <a href="/profile">Profile</a>
+    <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
@@ -43,10 +43,8 @@
     <% } %>
 
     <% if(request.getSession().getAttribute("user") != null){ %>
-        <h1>This is your profile page!></h1>
-    <% } else {
-
-    }%>
+      <p>This is your profile! </p>
+    <% } %>
   </div>
 </body>
 </html>
