@@ -22,7 +22,7 @@
 <body>
 
   <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
+    <a id="navTitle" href="/">The Chat in the Hat</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
@@ -44,18 +44,18 @@
       <ul>
         <li><strong>Blair Bucshon:</strong> Blair is finishing up her sophomore year at Cornell University.
           She is orginially from Indiana but now lives in Washington DC.
-          Blair really enjoys photography and hopes to be able to find 
+          Blair really enjoys photography and hopes to be able to find
           some new places to take photos this summer! </li>
-          
+
         <li><strong>Hafsah Hanif:</strong> Hafsah is a rising junior at Smith College.
-          She studies Computer Science and Government, and hopes to attend law school in the future. 
+          She studies Computer Science and Government, and hopes to attend law school in the future.
           Hafsah really enjoys playing tennis and hiking! </li>
-        
+
         <li><strong>Joseph Fletcher (Joe):</strong> Joe is a rising sophomore at Howard University.
           He loves music, photography and being active.
           Joe will be spending his summer in Washington DC and Massachusetts. </li>
-          
-          
+
+
         <li><strong>Our goals:</strong> To bring safe and secure messaging between friends! </li>
       </ul>
 
