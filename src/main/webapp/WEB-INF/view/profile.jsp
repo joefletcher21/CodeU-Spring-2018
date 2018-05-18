@@ -13,20 +13,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
-    <a href="/conversations">Profile</a>
+    <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
+    <a href="/profile.jsp">Profile</a>
   </nav>
 
   <div id="container">
