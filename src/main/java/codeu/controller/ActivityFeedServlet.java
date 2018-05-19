@@ -14,7 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
 
-public class ProfileServlet extends HttpServlet {
+public class ActivityFeedServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
@@ -44,6 +44,6 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+    request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
   }
 }

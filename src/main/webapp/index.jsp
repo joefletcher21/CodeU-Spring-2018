@@ -31,6 +31,7 @@
     <% } %>
     <a href="/about.jsp">About</a>
     <a href="/profile">Profile</a>
+    <a href="/activityfeed">Activity</a>
   </nav>
 
   <div id="container">
@@ -48,6 +49,8 @@
             project.</li>
         <li>View the <a href="/profile">profile</a> page to learn more
         about the user.</li>
+        <li>Checkout the <a href="/activityfeed">activity</a> page to  view the 
+        activity happening in every conversation.</li>
       </ul>
     </div>
   </div>
