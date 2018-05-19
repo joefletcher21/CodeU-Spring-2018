@@ -19,33 +19,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Conversations</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
-    <a href="/profile">Profile</a>
+    <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
+    <a href="/profile">Profile</a>
   </nav>
 
   <div id="container">
+    <div
+      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
+      <h1>This is your profile page! </h1>
+      <h1>Conversations</h1>
 
-    <% if(request.getSession().getAttribute("user") != null){ %>
-        <h1>This is your profile page!></h1>
-    <% } else {
+      <%
+      List<Conversation> conversations =
+        (List<Conversation>) request.getAttribute("conversations");
+      if(conversations == null || conversations.isEmpty()){
+      %>
+        <p>Create a conversation to get started.</p>
+      <%
+      }
+      else{
+      %>
+        <ul class="mdl-list">
+      <%
+        for(Conversation conversation : conversations){
+      %>
+        <li><a href="/chat/<%= conversation.getTitle() %>">
+          <%= conversation.getTitle() %></a></li>
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %>
 
-    }%>
+    </div>
   </div>
 </body>
 </html>
