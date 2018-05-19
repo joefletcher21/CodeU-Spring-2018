@@ -37,14 +37,37 @@
   </nav>
 
   <div id="container">
+    <div
+      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
+      <h1>This is your profile page! </h1>
+      <h1>Conversations</h1>
 
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <p>This is your profile! </p>
-    <% } %>
+      <%
+      List<Conversation> conversations =
+        (List<Conversation>) request.getAttribute("conversations");
+      if(conversations == null || conversations.isEmpty()){
+      %>
+        <p>Create a conversation to get started.</p>
+      <%
+      }
+      else{
+      %>
+        <ul class="mdl-list">
+      <%
+        for(Conversation conversation : conversations){
+      %>
+        <li><a href="/chat/<%= conversation.getTitle() %>">
+          <%= conversation.getTitle() %></a></li>
+      <%
+        }
+      %>
+        </ul>
+      <%
+      }
+      %>
+
+    </div>
   </div>
 </body>
 </html>
