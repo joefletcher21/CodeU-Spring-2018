@@ -26,7 +26,7 @@
 
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
-    <a href="/conversations">Conversations</a>
+    <a href="/profile">Profile</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
