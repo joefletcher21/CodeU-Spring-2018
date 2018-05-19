@@ -50,7 +50,7 @@
             project.</li>
         <li>View the <a href="/profile">profile</a> page to learn more
         about the user.</li>
-        <li>Checkout the <a href="/activityfeed">activity</a> page to  view the 
+        <li>Check out the <a href="/activityfeed">activity</a> page to  view the 
         activity happening in every conversation.</li>
       </ul>
     </div>
