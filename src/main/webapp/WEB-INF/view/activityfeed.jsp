@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Profile</title>
+  <title>Activity Feed</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -40,7 +40,7 @@
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
       <h1>This is the activity feed</h1>
-      
+
     </div>
   </div>
 </body>
