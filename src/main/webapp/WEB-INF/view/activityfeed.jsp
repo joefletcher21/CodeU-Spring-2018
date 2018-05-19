@@ -13,10 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Chat in the Hat</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -32,27 +33,14 @@
     <a href="/about.jsp">About</a>
     <a href="/profile">Profile</a>
     <a href="/activityfeed">Activity</a>
-
   </nav>
 
   <div id="container">
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-      <h1>The Chat in the Hat</h1>
-      <h2>Welcome!</h2>
-
-      <ul>
-        <li><a href="/login">Login</a> to get started.</li>
-        <li>Go to the <a href="/conversations">conversations</a> page to
-            create or join a conversation.</li>
-        <li>View the <a href="/about.jsp">about</a> page to learn more about the
-            project.</li>
-        <li>View the <a href="/profile">profile</a> page to learn more
-        about the user.</li>
-        <li>Checkout the <a href="/activityfeed">activity</a> page to  view the 
-        activity happening in every conversation.</li>
-      </ul>
+      <h1>This is the activity feed</h1>
+      
     </div>
   </div>
 </body>

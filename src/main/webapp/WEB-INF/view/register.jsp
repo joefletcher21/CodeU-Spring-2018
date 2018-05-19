@@ -22,7 +22,7 @@
 <body>
 
   <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
+    <a id="navTitle" href="/">The Chat in the Hat</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null) { %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
@@ -31,6 +31,7 @@
     <% } %>
     <a href="/about.jsp">About</a>
     <a href="/profile">Profile</a>
+    <a href="/activityfeed">Activity</a>
   </nav>
 
   <div id="container">
