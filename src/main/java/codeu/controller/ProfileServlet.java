@@ -38,7 +38,7 @@ public class ProfileServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user requests the /login URL. It simply forwards the request to
+   * This function fires when a user requests the /profile URL. It simply forwards the request to
    * profile.jsp.
    */
   @Override
