@@ -33,7 +33,7 @@
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
-    <a href="/profile">Profile</a>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
     <a href="/activityfeed">Activity</a>
   </nav>
 
@@ -41,7 +41,21 @@
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-      <h1>This is your profile page! </h1>
+      <%-- <h1>This is your profile page! </h1> --%>
+      <hr/>
+
+      <% if (request.getSession().getAttribute("user") != null) { %>
+      <form action="/chat/<%= conversation.getTitle() %>" method="POST">
+          <input type="text" name="message">
+          <br/>
+          <button type="submit">Send</button>
+      </form>
+      <% } else { %>
+        <p><a href="/login">Login</a> to send a message.</p>
+      <% } %>
+
+      <hr/>
+
       <h1>Conversations</h1>
 
       <%

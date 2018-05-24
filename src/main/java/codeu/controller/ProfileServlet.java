@@ -44,6 +44,15 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+         String requestUrl = request.getRequestURI();
+         String usernameUrl = requestUrl.substring("/users/".length());
+         request.setAttribute("username", usernameUrl);
+        // if (usernameUrl.equals(request.getSession().getAttribute("user"))){
+          request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+        // }
+        // else{
+        //   response.sendRedirect("/login");
+        //   return;
+        // }
   }
 }
