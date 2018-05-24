@@ -3,6 +3,7 @@ package codeu.controller;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.UUID;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
+import codeu.model.store.basic.MessageStore;
 
 public class ProfileServlet extends HttpServlet {
 
