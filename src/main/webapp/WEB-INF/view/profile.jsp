@@ -46,18 +46,6 @@
       <%-- <h1>This is your profile page! </h1> --%>
       <hr/>
 
-      <% if (request.getSession().getAttribute("user") != null) { %>
-      <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-          <input type="text" name="message">
-          <br/>
-          <button type="submit">Send</button>
-      </form>
-      <% } else { %>
-        <p><a href="/login">Login</a> to send a message.</p>
-      <% } %>
-
-      <hr/>
-
       <h1>Conversations</h1>
 
       <%
