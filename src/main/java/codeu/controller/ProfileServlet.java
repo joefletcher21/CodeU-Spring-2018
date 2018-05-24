@@ -20,9 +20,9 @@ public class ProfileServlet extends HttpServlet {
   private UserStore userStore;
 
   /**
-   * Set up state for handling registration-related requests. This method is only called when
-   * running in a server, not when running in a test.
-   */
+  * Set up state for handling registration-related requests. This method is only called when
+  * running in a server, not when running in a test.
+  */
   @Override
   public void init() throws ServletException {
     super.init();
@@ -30,29 +30,27 @@ public class ProfileServlet extends HttpServlet {
   }
 
   /**
-   * Sets the UserStore used by this servlet. This function provides a common setup method for use
-   * by the test framework or the servlet's init() function.
-   */
+  * Sets the UserStore used by this servlet. This function provides a common setup method for use
+  * by the test framework or the servlet's init() function.
+  */
   void setUserStore(UserStore userStore) {
     this.userStore = userStore;
   }
 
   /**
-   * This function fires when a user requests the /profile URL. It simply forwards the request to
-   * profile.jsp.
-   */
+  * This function fires when a user requests the /profile URL. It simply forwards the request to
+  * profile.jsp.
+  */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-         String requestUrl = request.getRequestURI();
-         String usernameUrl = requestUrl.substring("/users/".length());
-         request.setAttribute("user", usernameUrl);
-        // if (usernameUrl.equals(request.getSession().getAttribute("user"))){
-          request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
-        // }
-        // else{
-        //   response.sendRedirect("/login");
-        //   return;
-        // }
+  throws IOException, ServletException {
+    String requestUrl = request.getRequestURI();
+    String usernameUrl = requestUrl.substring("/users/".length());
+    User currentUser = userStore.getUser(usernameUrl);
+    List<Message> currentUserMessages = messageStore.getUserMessages(currentUser);
+    request.setAttribute("messages", currentUserMessages)
+    request.setAttribute("user", usernameUrl);
+    request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+
   }
 }

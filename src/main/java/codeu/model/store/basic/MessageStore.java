@@ -85,6 +85,20 @@ public class MessageStore {
     return messagesInConversation;
   }
 
+  /** Access the current set of Messages sent by the user. */
+  public List<Message> getUserMessages(UUID userId) {
+
+    List<Message> userMessages = new ArrayList<>();
+
+    for (Message message : messages) {
+      if (message.getAuthorId().equals(userId)) {
+        userMessages.add(message);
+      }
+    }
+
+    return userMessages;
+  }
+
   /** Sets the List of Messages stored by this MessageStore. */
   public void setMessages(List<Message> messages) {
     this.messages = messages;

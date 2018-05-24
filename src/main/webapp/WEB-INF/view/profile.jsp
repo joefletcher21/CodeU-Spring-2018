@@ -49,21 +49,21 @@
       <h1>Conversations</h1>
 
       <%
-      List<Conversation> conversations =
-        (List<Conversation>) request.getAttribute("conversations");
-      if(conversations == null || conversations.isEmpty()){
+      List<Message> messages =
+        (List<Message>) request.getAttribute("messages");
+      if(messages == null || messages.isEmpty()){
       %>
-        <p>Create a conversation to get started.</p>
+        <p> No messages have been sent.</p>
       <%
       }
       else{
       %>
         <ul class="mdl-list">
       <%
-        for(Conversation conversation : conversations){
+        for(Message eachMessage : messages){
       %>
         <li><a href="/chat/<%= conversation.getTitle() %>">
-          <%= conversation.getTitle() %></a></li>
+          <% eachMessage %></a></li>
       <%
         }
       %>
