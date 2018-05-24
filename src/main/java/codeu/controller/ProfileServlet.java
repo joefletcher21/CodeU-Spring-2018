@@ -46,7 +46,7 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
          String requestUrl = request.getRequestURI();
          String usernameUrl = requestUrl.substring("/users/".length());
-         request.setAttribute("username", usernameUrl);
+         request.setAttribute("user", usernameUrl);
         // if (usernameUrl.equals(request.getSession().getAttribute("user"))){
           request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
         // }
