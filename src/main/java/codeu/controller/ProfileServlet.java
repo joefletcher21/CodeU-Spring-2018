@@ -55,6 +55,7 @@ public class ProfileServlet extends HttpServlet {
   throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
     int indexOfUser = requestUrl.indexOf("/users/");
+    // if (indexOfUser >= 0){
     System.out.println("index of user: "+indexOfUser);
     String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(), requestUrl.length());
     System.out.println("name of user: "+usernameUrl);
@@ -63,11 +64,33 @@ public class ProfileServlet extends HttpServlet {
     if (currentUser != null){
       currentUserMessages = messageStore.getUserMessages( currentUser.getId());
       System.out.println("in the null if statement");
+
     }
     System.out.println(currentUserMessages.size());
     request.setAttribute("messages", currentUserMessages);
     request.setAttribute("user", usernameUrl);
+
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+
+  }
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+  throws IOException, ServletException {
+  String username = (String) request.getSession().getAttribute("user");
+  if (username == null) {
+    // user is not logged in, don't let them create a conversation
+    response.sendRedirect("/conversations");
+    return;
+  }
+
+  User user = userStore.getUser(username);
+  if (user == null) {
+    // user was not found, don't let them create a conversation
+    System.out.println("User not found: " + username);
+    response.sendRedirect("/conversations");
+    return;
+  }
+
 
   }
 }
