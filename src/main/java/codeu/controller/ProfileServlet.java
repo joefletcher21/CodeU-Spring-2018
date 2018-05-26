@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.UUID;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +16,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
 import codeu.model.store.basic.MessageStore;
+import codeu.model.data.Message;
 
 public class ProfileServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
+  private MessageStore messageStore;
 
   /**
   * Set up state for handling registration-related requests. This method is only called when
@@ -29,6 +32,7 @@ public class ProfileServlet extends HttpServlet {
   public void init() throws ServletException {
     super.init();
     setUserStore(UserStore.getInstance());
+    setMessageStore(MessageStore.getInstance());
   }
 
   /**
@@ -37,6 +41,9 @@ public class ProfileServlet extends HttpServlet {
   */
   void setUserStore(UserStore userStore) {
     this.userStore = userStore;
+  }
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore;
   }
 
   /**
@@ -47,9 +54,17 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
   throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
-    String usernameUrl = requestUrl.substring("/users/".length());
+    int indexOfUser = requestUrl.indexOf("/users/");
+    System.out.println("index of user: "+indexOfUser);
+    String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(), requestUrl.length());
+    System.out.println("name of user: "+usernameUrl);
     User currentUser = userStore.getUser(usernameUrl);
-    List<Message> currentUserMessages = messageStore.getUserMessages(currentUser);
+    List<Message> currentUserMessages = new ArrayList<Message>();
+    if (currentUser != null){
+      currentUserMessages = messageStore.getUserMessages( currentUser.getId());
+      System.out.println("in the null if statement");
+    }
+    System.out.println(currentUserMessages.size());
     request.setAttribute("messages", currentUserMessages);
     request.setAttribute("user", usernameUrl);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);

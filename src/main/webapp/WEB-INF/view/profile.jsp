@@ -15,6 +15,7 @@
 --%>
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.Message" %>
 
 <!DOCTYPE html>
 <html>
@@ -46,11 +47,10 @@
       <%-- <h1>This is your profile page! </h1> --%>
       <hr/>
 
-      <h1>Conversations</h1>
+      <h1>Messages</h1>
 
       <%
-      List<Message> messages =
-        (List<Message>) request.getAttribute("messages");
+      List<Message> messages = (List<Message>)request.getAttribute("messages");
       if(messages == null || messages.isEmpty()){
       %>
         <p> No messages have been sent.</p>
@@ -62,8 +62,8 @@
       <%
         for(Message eachMessage : messages){
       %>
-        <li><a href="/chat/<%= conversation.getTitle() %>">
-          <% eachMessage %></a></li>
+      <li><a href="/chat/<%= eachMessage.getAuthorId() %>">
+        <%= eachMessage.getContent() %></a></li>
       <%
         }
       %>
