@@ -73,9 +73,19 @@
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
-    <url-pattern>/profile</url-pattern>
+    <url-pattern>/users/*</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>EditServlet</servlet-name>
+    <servlet-class>codeu.controller.EditServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>EditServlet</servlet-name>
+    <url-pattern>/users/*/edit</url-pattern>
+  </servlet-mapping>
+ 
   <servlet>
     <servlet-name>ActivityFeedServlet</servlet-name>
     <servlet-class>codeu.controller.ActivityFeedServlet</servlet-class>
