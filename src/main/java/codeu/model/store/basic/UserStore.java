@@ -119,6 +119,15 @@ public class UserStore {
     return false;
   }
 
+  public boolean isAdministrator(String username) {
+    for (User user : users) {
+      if (user.getName().equals(username)) {
+        return user.getIsAdmin();
+      }
+    }
+    return false;
+  }
+
   /**
    * Sets the List of Users stored by this UserStore. This should only be called once, when the data
    * is loaded from Datastore.
