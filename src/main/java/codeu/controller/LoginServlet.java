@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
+  private String username;
 
   /**
    * Set up state for handling login-related requests. This method is only called when running in a
@@ -55,7 +56,9 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+
     request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+
   }
 
   /**
@@ -66,7 +69,8 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    String username = request.getParameter("username");
+    username = request.getParameter("username");
+
     String password = request.getParameter("password");
 
     if (!userStore.isUserRegistered(username)) {
@@ -85,5 +89,9 @@ public class LoginServlet extends HttpServlet {
 
     request.getSession().setAttribute("user", username);
     response.sendRedirect("/conversations");
+  }
+
+  public String getCurrentUser (){
+    return  username;
   }
 }

@@ -46,33 +46,77 @@ limitations under the License.
 
           <%-- <h1>This is your profile page! </h1> --%>
           <hr/>
+          <%-- <p> <%=request.getParameter("username")%> </p> --%>
 
-          <h1>Sent Messages</h1>
-          <%
-          List<Message> messages = (List<Message>)request.getAttribute("messages");
-          if(messages == null || messages.isEmpty()){
+
+          <%-- <%
+          if ((request.getParameter("username")) != null && (request.getSession().getAttribute("user")!=null)){
             %>
-            <p> No messages have been sent.</p>
-            <%
-          }
-          else{
-            %>
-            <ul class="mdl-list">
-              <%
-              for(Message eachMessage : messages){
-                %>
-                <li>
-                  <a><%= eachMessage.getContent() %></a></li>
+            <p>You can edit your profile here</p>
+            <% if (request.getParameter("username").equals(request.getSession().getAttribute("user"))){
+              %> --%>
+              <%-- <li>Edit profile<a href="/edit">here</a>.</li> --%>
+              <%-- <div>
+                <form action = "/profile" method = "POST">
+                  <textarea name = "About_me_message" rows = "10" cols = "40">
+                    who are you?
+                  </textarea>
+                  <br>
+                    <input type = "Submit">
+                      <%-- <%
+
+                    }%>
+                    <%
+                  }%> --%>
+
+
+                <%-- </div> --%>
+                <p><%=request.getAttribute("about")%></p>
+                <% if (request.getSession().getAttribute("user") != null){
+                  %>
+
+                <% if (request.getSession().getAttribute("user").equals(request.getAttribute("currentUser"))){
+                  %>
+                  <h3> Edit Profile </h3>
+                  <form action = "/users/<%=request.getSession().getAttribute("user")%>" method = "POST">
+                  <div class = "form-group">
+                    <textarea name = "about me" id = "about me" rows = "10" cols = "100" placeholder = "Enter some info about yourself!">
+                      <br>
+                        <input type = "Submit">
+                        </div>
+                <%}
+              } %>
+
+
+
+
+
+                <h1>Sent Messages</h1>
+                <%
+                List<Message> messages = (List<Message>)request.getAttribute("messages");
+                if(messages == null || messages.isEmpty()){
+                  %>
+                  <p> No messages have been sent.</p>
                   <%
-
                 }
-                %>
-              </ul>
-              <%
-            }
-            %>
+                else{
+                  %>
+                  <ul class="mdl-list">
+                    <%
+                    for(Message eachMessage : messages){
+                      %>
+                      <li>
+                        <a><%= eachMessage.getContent() %></a></li>
+                        <%
 
-          </div>
-        </div>
-      </body>
-    </html>
+                      }
+                      %>
+                    </ul>
+                    <%
+                  }
+                  %>
+
+                </div>
+              </div>
+            </body>
+          </html>

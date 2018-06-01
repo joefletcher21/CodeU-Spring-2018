@@ -60,37 +60,54 @@ public class ProfileServlet extends HttpServlet {
     String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(), requestUrl.length());
     System.out.println("name of user: "+usernameUrl);
     User currentUser = userStore.getUser(usernameUrl);
+
+    String aboutCurrentUser;
+    if ((currentUser != null) && (currentUser.getAboutMe() != null)){
+      aboutCurrentUser = currentUser.getAboutMe();
+    }
+    // delete later:
+    else{
+      aboutCurrentUser = "No profile has been created";
+    }
+
     List<Message> currentUserMessages = new ArrayList<Message>();
     if (currentUser != null){
       currentUserMessages = messageStore.getUserMessages( currentUser.getId());
       System.out.println("in the null if statement");
-
     }
+
     System.out.println(currentUserMessages.size());
+    request.setAttribute("about", aboutCurrentUser);
     request.setAttribute("messages", currentUserMessages);
     request.setAttribute("user", usernameUrl);
+    request.setAttribute("currentUser", currentUser);
+    // request.setAttribute("username", request.getRemoteUser ());
+    // System.out.println("username get aram: "+request.getRemoteUser ());
 
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
 
   }
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
   throws IOException, ServletException {
-  String username = (String) request.getSession().getAttribute("user");
-  if (username == null) {
-    // user is not logged in, don't let them create a conversation
-    response.sendRedirect("/conversations");
-    return;
-  }
+    String username = (String) request.getSession().getAttribute("user");
 
-  User user = userStore.getUser(username);
-  if (user == null) {
-    // user was not found, don't let them create a conversation
-    System.out.println("User not found: " + username);
-    response.sendRedirect("/conversations");
-    return;
-  }
+    if (username == null) {
+      // user is not logged in, don't let them create a conversation
+      response.sendRedirect("/login");
+      return;
+    }
 
+    User user = userStore.getUser(username);
+    if (user == null) {
+      // user was not found, don't let them create a conversation
+      System.out.println("User not found: " + username);
+      response.sendRedirect("/login");
+      return;
+    }
+    System.out.println("didnt go in nulls and in POST");
+    response.sendRedirect("/users/"+username);
 
   }
 }
