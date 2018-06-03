@@ -43,11 +43,6 @@ public class AdminServlet extends HttpServlet{
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    String username = request.getParameter("username");
-    if (!userStore.isAdministrator(username)) {
-      request.setAttribute("error", "This user is not an administrator");
       request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
-      return;
     }  
-  }
 }
