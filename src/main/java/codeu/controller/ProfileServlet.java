@@ -17,6 +17,8 @@ import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.data.Message;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 public class ProfileServlet extends HttpServlet {
 
@@ -57,7 +59,8 @@ public class ProfileServlet extends HttpServlet {
     int indexOfUser = requestUrl.indexOf("/users/");
     // if (indexOfUser >= 0){
     System.out.println("index of user: "+indexOfUser);
-    String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(), requestUrl.length());
+    String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(),
+      requestUrl.length());
     System.out.println("name of user: "+usernameUrl);
     User currentUser = userStore.getUser(usernameUrl);
 
@@ -79,7 +82,7 @@ public class ProfileServlet extends HttpServlet {
     System.out.println(currentUserMessages.size());
     request.setAttribute("about", aboutCurrentUser);
     request.setAttribute("messages", currentUserMessages);
-    request.setAttribute("user", usernameUrl);
+    request.setAttribute("ownerUser", usernameUrl);
     request.setAttribute("currentUser", currentUser);
     // request.setAttribute("username", request.getRemoteUser ());
     // System.out.println("username get aram: "+request.getRemoteUser ());
@@ -92,21 +95,29 @@ public class ProfileServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
   throws IOException, ServletException {
     String username = (String) request.getSession().getAttribute("user");
+    //User currentUser = userStore.getUser(username);
 
     if (username == null) {
       // user is not logged in, don't let them create a conversation
       response.sendRedirect("/login");
+      System.out.println("In the first if: username ==null");
       return;
     }
 
-    User user = userStore.getUser(username);
-    if (user == null) {
+    User ownerUser = userStore.getUser(username);
+    if (ownerUser == null) {
       // user was not found, don't let them create a conversation
       System.out.println("User not found: " + username);
+      System.out.println("In the second if: user ==null");
       response.sendRedirect("/login");
       return;
     }
     System.out.println("didnt go in nulls and in POST");
+
+    String aboutMeContent = (String)request.getParameter("aboutMe");
+    String cleanedAboutMeContent = Jsoup.clean(aboutMeContent, Whitelist.none());
+    ownerUser.setAboutMe(cleanedAboutMeContent);
+    userStore.getInstance().updateUser(ownerUser);
     response.sendRedirect("/users/"+username);
 
   }

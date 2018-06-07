@@ -34,8 +34,8 @@ limitations under the License.
         <% } %>
         <a href="/conversations">Conversations</a>
         <a href="/about.jsp">About</a>
-        <% if(request.getSession().getAttribute("user") != null){ %>
-        <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
+        <% if(request.getSession().getAttribute("ownerUser") != null){ %>
+        <a href="/users/<%=request.getSession().getAttribute("ownerUser")%>">Profile</a>
         <% }  %>
         <a href="/activityfeed">Activity</a>
       </nav>
@@ -75,17 +75,20 @@ limitations under the License.
                 <% if (request.getSession().getAttribute("user") != null){
                   %>
 
-                <% if (request.getSession().getAttribute("user").equals(request.getAttribute("currentUser"))){
+                <% if (request.getSession().getAttribute("user").equals(request.getAttribute("ownerUser"))){
                   %>
                   <h3> Edit Profile </h3>
                   <form action = "/users/<%=request.getSession().getAttribute("user")%>" method = "POST">
                   <div class = "form-group">
                     <textarea name = "about me" id = "about me" rows = "10" cols = "100" placeholder = "Enter some info about yourself!">
+                      </textarea>
                       <br>
                         <input type = "Submit">
                         </div>
-                <%}
-              } %>
+                        <%
+                      }%>
+                        <%
+                      }%>
 
 
 

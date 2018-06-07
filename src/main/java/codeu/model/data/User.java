@@ -33,12 +33,12 @@ public class User {
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation) {
+  public User(UUID id, String name, String passwordHash, Instant creation, String aboutMe) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
-    aboutMe = "";
+    this.aboutMe = aboutMe;
   }
 
   /** Returns the ID of this User. */
