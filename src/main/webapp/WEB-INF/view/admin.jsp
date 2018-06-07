@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+<%import codeu.model.store.basic.ConversationStore; %>
 
 <!DOCTYPE html>
 <html>
@@ -41,6 +42,7 @@
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
       <h1>This is the Admin page</h1>
+      <p>Conversations <%= conversationStore.numberOfConverstions() %> <p>
 
     </div>
   </div>

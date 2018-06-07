@@ -43,6 +43,16 @@ public class AdminServlet extends HttpServlet{
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-      request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+      	String username = (String) request.getSession().getAttribute("user");
+      	User user = userStore.getUser(username);
+      	if (user==null){
+      		request.getRequestDispatcher("/WEB-INF/view/accessdenied.jsp").forward(request, response);
+      	}
+    	else if (user.getIsAdmin()){
+      		request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+      	}else{
+      		request.getRequestDispatcher("/WEB-INF/view/accessdenied.jsp").forward(request, response);
+      	}
+      	
     }  
 }
