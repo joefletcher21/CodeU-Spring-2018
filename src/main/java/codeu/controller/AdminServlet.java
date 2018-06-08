@@ -2,6 +2,8 @@ package codeu.controller;
 
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
+import codeu.model.data.Conversation;
+import codeu.model.store.basic.ConversationStore;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ public class AdminServlet extends HttpServlet{
 
 	/** Store class that gives access to Users. */
 	private UserStore userStore;
+	private ConversationStore conversationStore;
 
 
   /**
@@ -26,6 +29,7 @@ public class AdminServlet extends HttpServlet{
   public void init() throws ServletException {
     super.init();
     setUserStore(UserStore.getInstance());
+    setConversationStore(ConversationStore.getInstance());
   }
 
     /**
@@ -34,6 +38,10 @@ public class AdminServlet extends HttpServlet{
    */
   void setUserStore(UserStore userStore) {
     this.userStore = userStore; 
+  }
+
+  void setConversationStore(ConversationStore conversationStore){
+  	this.conversationStore= conversationStore;
   }
 
     /**
