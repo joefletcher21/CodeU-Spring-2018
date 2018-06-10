@@ -14,7 +14,7 @@
   limitations under the License.
 --%>
 <%@ page import="codeu.model.data.Conversation" %>
-<%@ page import= "import codeu.model.store.basic.ConversationStore" %>
+<%@ page import= "codeu.model.store.basic.ConversationStore" %>
 
 <!DOCTYPE html>
 <html>
@@ -41,9 +41,12 @@
   <div id="container">
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
-
       <h1>This is the Admin page</h1>
-      <p>Conversations <%= conversationStore.numberOfConverstions() %> <p>
+      <%
+      List<Conversation> conversations =
+        (List<Conversation>) request.getAttribute("conversations");
+        %>
+      <p>Conversations: <%= conversations.numberOfConversations() %> <p>
 
     </div>
   </div>
