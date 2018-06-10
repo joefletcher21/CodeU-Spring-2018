@@ -114,7 +114,7 @@ public class ProfileServlet extends HttpServlet {
     }
     System.out.println("didnt go in nulls and in POST");
 
-    String aboutMeContent = (String)request.getParameter("aboutMe");
+    String aboutMeContent = (String)request.getParameter("about");
     String cleanedAboutMeContent = Jsoup.clean(aboutMeContent, Whitelist.none());
     ownerUser.setAboutMe(cleanedAboutMeContent);
     userStore.getInstance().updateUser(ownerUser);

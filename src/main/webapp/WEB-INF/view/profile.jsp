@@ -16,6 +16,7 @@ limitations under the License.
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.Message" %>
+<%@ page import="java.util.Date" %>
 
 <!DOCTYPE html>
 <html>
@@ -34,8 +35,8 @@ limitations under the License.
         <% } %>
         <a href="/conversations">Conversations</a>
         <a href="/about.jsp">About</a>
-        <% if(request.getSession().getAttribute("ownerUser") != null){ %>
-        <a href="/users/<%=request.getSession().getAttribute("ownerUser")%>">Profile</a>
+        <% if(request.getAttribute("ownerUser") != null){ %>
+        <a href="/users/<%=request.getAttribute("ownerUser")%>">Profile</a>
         <% }  %>
         <a href="/activityfeed">Activity</a>
       </nav>
@@ -71,24 +72,28 @@ limitations under the License.
 
 
                 <%-- </div> --%>
-                <p><%=request.getAttribute("about")%></p>
+                <h1> Welcome to <%=request.getAttribute("ownerUser")%>'s Profile Page </h1>
+
+                <h5 style="color:blue"><%= request.getAttribute("about") %></h5>
+
+                <%-- <p><%=%></p> --%>
                 <% if (request.getSession().getAttribute("user") != null){
                   %>
 
                 <% if (request.getSession().getAttribute("user").equals(request.getAttribute("ownerUser"))){
                   %>
-                  <h3> Edit Profile </h3>
+
                   <form action = "/users/<%=request.getSession().getAttribute("user")%>" method = "POST">
+                  <label for="about">Edit my profile: </label>
+                  <br/>
                   <div class = "form-group">
-                    <textarea name = "about me" id = "about me" rows = "10" cols = "100" placeholder = "Enter some info about yourself!">
-                      </textarea>
-                      <br>
+                    <textarea name = "about" id = "about" rows = "10" cols = "100" placeholder = "Enter some info about yourself!"></textarea>
+                      <br/>
                         <input type = "Submit">
+                        </form>
                         </div>
-                        <%
-                      }%>
-                        <%
-                      }%>
+                        <%}%>
+                        <%}%>
 
 
 
@@ -106,10 +111,15 @@ limitations under the License.
                   %>
                   <ul class="mdl-list">
                     <%
+
                     for(Message eachMessage : messages){
                       %>
+
                       <li>
-                        <a><%= eachMessage.getContent() %></a></li>
+                        <%Date date = Date.from(eachMessage.getCreationTime());%>
+                        <p><%= date %>: <p style="color:purple"><%= eachMessage.getContent() %></p> </p>
+                        <%-- <h5> <%= date %> <a><%= eachMessage.getContent() %></a></h5> --%>
+                      </li>
                         <%
 
                       }
