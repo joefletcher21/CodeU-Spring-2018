@@ -4,11 +4,14 @@ import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
 import codeu.model.data.Conversation;
 import codeu.model.store.basic.ConversationStore;
+import codeu.model.data.Message;
+import codeu.model.store.basic.MessageStore;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -19,6 +22,7 @@ public class AdminServlet extends HttpServlet{
 	/** Store class that gives access to Users. */
 	private UserStore userStore;
 	private ConversationStore conversationStore;
+	private MessageStore messageStore;
 
 
   /**
@@ -30,6 +34,7 @@ public class AdminServlet extends HttpServlet{
     super.init();
     setUserStore(UserStore.getInstance());
     setConversationStore(ConversationStore.getInstance());
+    setMessageStore(MessageStore.getInstance());
   }
 
     /**
@@ -42,6 +47,10 @@ public class AdminServlet extends HttpServlet{
 
   void setConversationStore(ConversationStore conversationStore){
   	this.conversationStore= conversationStore;
+  }
+
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore; 
   }
 
     /**
@@ -57,7 +66,14 @@ public class AdminServlet extends HttpServlet{
       		request.getRequestDispatcher("/WEB-INF/view/accessdenied.jsp").forward(request, response);
       	}
     	else if (user.getIsAdmin()){
+    		List<Conversation> conversations = conversationStore.getAllConversations();
+    		request.setAttribute("conversations", conversations);
+    		List<User> users = userStore.getAllUsers();
+    		request.setAttribute("users", users);
+    		List<Message> messages = messageStore.getAllMessages();
+    		request.setAttribute("messages", messages);
       		request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+
       	}else{
       		request.getRequestDispatcher("/WEB-INF/view/accessdenied.jsp").forward(request, response);
       	}
