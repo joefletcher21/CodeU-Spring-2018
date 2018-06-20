@@ -14,7 +14,13 @@
   limitations under the License.
 --%>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.store.basic.MessageStore" %>
 <%@ page import= "codeu.model.store.basic.ConversationStore" %>
+<%@ page import= "codeu.model.store.basic.UserStore" %>
+<%@ page import="java.util.List" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -41,12 +47,23 @@
   <div id="container">
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
-      <h1>This is the Admin page</h1>
+      <h1>Administration</h1>
+      <hr>
+      <h3>Site Statistics</h3>
+      <p>
+        Here are some site statistics:
+      </p>
+
+      <ul>
       <%
-      List<Conversation> conversations =
-        (List<Conversation>) request.getAttribute("conversations");
+      List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+      List<User> users = (List<User>) request.getAttribute("users");
+      List<Message> messages = (List<Message>) request.getAttribute("messages");
         %>
-      <p>Conversations: <%= conversations.numberOfConversations() %> <p>
+        <li><strong>Conversations: </strong> <%= conversations.size() %> </li>
+        <li><strong>Users: </strong> <%= users.size() %> </li>
+        <li><strong>Messages: </strong> <%= messages.size() %> </li>
+      </ul>
 
     </div>
   </div>
