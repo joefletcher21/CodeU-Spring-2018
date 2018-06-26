@@ -1,28 +1,29 @@
 <%--
-  Copyright 2017 Google Inc.
+Copyright 2017 Google Inc.
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.Message" %>
 
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Profile</title>
-  <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
+  <head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
 
       <nav>
         <a id="navTitle" href="/">The Chat in the Hat</a>
@@ -39,38 +40,39 @@
         <a href="/activityfeed">Activity</a>
       </nav>
 
-  <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
+      <div id="container">
+        <div
+          style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-      <h1>This is your profile page! </h1>
-      <h1>Conversations</h1>
+          <%-- <h1>This is your profile page! </h1> --%>
+          <hr/>
 
-      <%
-      List<Conversation> conversations =
-        (List<Conversation>) request.getAttribute("conversations");
-      if(conversations == null || conversations.isEmpty()){
-      %>
-        <p>Create a conversation to get started.</p>
-      <%
-      }
-      else{
-      %>
-        <ul class="mdl-list">
-      <%
-        for(Conversation conversation : conversations){
-      %>
-        <li><a href="/chat/<%= conversation.getTitle() %>">
-          <%= conversation.getTitle() %></a></li>
-      <%
-        }
-      %>
-        </ul>
-      <%
-      }
-      %>
+          <h1>Sent Messages</h1>
+          <%
+          List<Message> messages = (List<Message>)request.getAttribute("messages");
+          if(messages == null || messages.isEmpty()){
+            %>
+            <p> No messages have been sent.</p>
+            <%
+          }
+          else{
+            %>
+            <ul class="mdl-list">
+              <%
+              for(Message eachMessage : messages){
+                %>
+                <li>
+                  <a><%= eachMessage.getContent() %></a></li>
+                  <%
 
-    </div>
-  </div>
-</body>
-</html>
+                }
+                %>
+              </ul>
+              <%
+            }
+            %>
+
+          </div>
+        </div>
+      </body>
+    </html>

@@ -19,6 +19,7 @@ import codeu.model.store.persistence.PersistentStorageAgent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import codeu.model.data.User;
 
 /**
  * Store class that uses in-memory data structures to hold values and automatically loads from and
@@ -88,6 +89,20 @@ public class MessageStore {
     }
 
     return messagesInConversation;
+  }
+
+  /** Access the current set of Messages sent by the user. */
+  public List<Message> getUserMessages(UUID userId) {
+
+    List<Message> userMessages = new ArrayList<>();
+
+    for (Message message : messages) {
+      if (message.getAuthorId().equals(userId)) {
+        userMessages.add(message);
+      }
+    }
+
+    return userMessages;
   }
 
   /** Sets the List of Messages stored by this MessageStore. */
