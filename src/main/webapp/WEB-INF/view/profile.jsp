@@ -38,6 +38,7 @@ limitations under the License.
         <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
         <% }  %>
         <a href="/activityfeed">Activity</a>
+        <a href="/admin">Admin</a>
       </nav>
 
       <div id="container">
