@@ -38,6 +38,7 @@ public class User {
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    // this.aboutMe = aboutMe;
     this.aboutMe = "";
   }
 
