@@ -47,7 +47,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <body onload="scrollChat()">
 
   <nav>
-    <a id="navTitle" href="/">The Chat in the Hat</a>
+    <a id="navTitle" href="/">CodeU Chat App</a>
     <a href="/conversations">Conversations</a>
       <% if (request.getSession().getAttribute("user") != null) { %>
     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
@@ -71,8 +71,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-
-      <li><strong><a href="/users/<%=request.getSession().getAttribute("user")%>"> <%= author %> </a>:</strong> <%= message.getContent() %></li>
+      <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
     <%
       }
     %>
@@ -84,6 +83,13 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <% if (request.getSession().getAttribute("user") != null) { %>
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
         <input type="text" name="message">
+         Style characters (Put the text you want styled in place of the dots)
+	       <ul>  
+	         "     Bold: <b>...</b>
+	         Italics: <i>...</i>
+	         Underline: <u>...</u>
+	         Strikethrough: <strike>...</strike>"
+           </ul>
         <br/>
         <button type="submit">Send</button>
     </form>
