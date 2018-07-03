@@ -61,10 +61,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <h1><%= conversation.getTitle() %>
       <a href="" style="float: right">&#8635;</a></h1>
-
+    <button onclick="deleteButtons()">Delete</button>
     <hr/>
 
-    <div id="chat">
+    <div id="chat_with_delete" style="display:none;">
       <ul>
     <%
       for (Message message : messages) {
@@ -77,6 +77,34 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     %>
       </ul>
     </div>
+
+    <div id="chat">
+      <ul>
+    <%
+      for (Message message : messages) {
+        String author = UserStore.getInstance()
+          .getUser(message.getAuthorId()).getName();
+    %>
+      <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
+    <%
+      }
+    %>
+      </ul>
+    </div>
+
+    <script>
+        function deleteButtons() {
+          var chatWithDiv = document.getElementById('chat_with_delete');
+          var chatDiv = document.getElementById('chat');
+          if (chatWithDiv.style.display === "none") {
+            chatWithDiv.style.display = 'block';
+            chatDiv.style.display = 'none';
+          } else {
+            chatDiv.style.display = 'block';
+            chatWithDiv.style.display = 'none';
+          } 
+        }
+    </script>
 
     <hr/>
 
