@@ -72,7 +72,10 @@ public class MessageStore {
     persistentStorageAgent.writeThrough(message);
   }
 
-  // ADD A removeMessage (Message message) method here
+  /** Access the current set of messages known to the application. */
+  public List<Message> getAllMessages() {
+    return messages;
+  }
 
   /** Access the current set of Messages within the given Conversation. */
   public List<Message> getMessagesInConversation(UUID conversationId) {

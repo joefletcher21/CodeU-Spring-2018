@@ -13,6 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+<%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.store.basic.MessageStore" %>
+<%@ page import= "codeu.model.store.basic.ConversationStore" %>
+<%@ page import= "codeu.model.store.basic.UserStore" %>
+<%@ page import="java.util.List" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -24,17 +32,14 @@
 
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
+    <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
       <a href="/login">Login</a>
     <% } %>
-    <a href="/conversations">Conversations</a>
-
     <a href="/about.jsp">About</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
-    <% }  %>
+    <a href="/profile">Profile</a>
     <a href="/activityfeed">Activity</a>
     <a href="/admin">Admin</a>
   </nav>
@@ -42,8 +47,23 @@
   <div id="container">
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
+      <h1>Administration</h1>
+      <hr>
+      <h3>Site Statistics</h3>
+      <p>
+        Here are some site statistics:
+      </p>
 
-      <h1>This is the activity feed</h1>
+      <ul>
+      <%
+      List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+      List<User> users = (List<User>) request.getAttribute("users");
+      List<Message> messages = (List<Message>) request.getAttribute("messages");
+        %>
+        <li><strong>Conversations: </strong> <%= conversations.size() %> </li>
+        <li><strong>Users: </strong> <%= users.size() %> </li>
+        <li><strong>Messages: </strong> <%= messages.size() %> </li>
+      </ul>
 
     </div>
   </div>
