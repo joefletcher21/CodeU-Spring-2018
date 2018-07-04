@@ -72,6 +72,8 @@ public class MessageStore {
     persistentStorageAgent.writeThrough(message);
   }
 
+  // ADD A removeMessage (Message message) method here
+
   /** Access the current set of Messages within the given Conversation. */
   public List<Message> getMessagesInConversation(UUID conversationId) {
 
@@ -104,4 +106,31 @@ public class MessageStore {
   public void setMessages(List<Message> messages) {
     this.messages = messages;
   }
+
+  public void deleteUserMessage(Message deleteMessage, UUID userId){
+    List<Message> userMessages = getUserMessages(userId);
+    if (deleteMessage.getAuthorId().equals(userId)){
+      for (Message message : userMessages){
+        if (message.getId().equals(deleteMessage.getId())){
+          deleteMessage.addDeleteForUser(deleteMessage);
+          removeMessageFromDisplay(userId);
+          // display success message
+          // call method that loops through all the user's messages
+          // if the message's delete is not null then hide the message
+        }
+      }
+    }
+    //else: display error message
+  }
+
+  public void removeMessageFromDisplay(UUID userId){
+    List<Message> userMessages = getUserMessages(userId);
+    if (Message message:userMessages){
+      if (message.getDeleteForUser() != null){
+        // HIDE THE MESSAGE FROM DISPLAY
+      }
+    }
+
+  }
+
 }
