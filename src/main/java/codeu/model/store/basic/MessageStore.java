@@ -110,6 +110,7 @@ public class MessageStore {
     this.messages = messages;
   }
 
+  /** loops through all of users messages until message to be deleted is found */
   public void deleteUserMessage(Message deleteMessage, UUID userId){
     List<Message> userMessages = getUserMessages(userId);
     if (deleteMessage.getAuthorId().equals(userId)){
@@ -126,9 +127,10 @@ public class MessageStore {
     //else: display error message
   }
 
+  /** removes the message from users display */
   public void removeMessageFromDisplay(UUID userId){
     List<Message> userMessages = getUserMessages(userId);
-    if (Message message:userMessages){
+    for (Message message:userMessages){
       if (message.getDeleteForUser() != null){
         // HIDE THE MESSAGE FROM DISPLAY
       }

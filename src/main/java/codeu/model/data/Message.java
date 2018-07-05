@@ -16,6 +16,8 @@ package codeu.model.data;
 
 import java.time.Instant;
 import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
 public class Message {
@@ -69,11 +71,12 @@ public class Message {
   public Instant getCreationTime() {
     return creation;
   }
-
+  /** returns list of users that have "deleted" the selected message */
   public List<Message> getDeleteForUser(){
     return deleteForUser;
   }
 
+  /** adds user to list of users that have "deleted" selected message */
   public void addDeleteForUser(Message deleteMessage){
     deleteForUser.add(deleteMessage);
   }
