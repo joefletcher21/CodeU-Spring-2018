@@ -111,18 +111,18 @@ public class MessageStore {
   }
 
   /** loops through all of users messages until message to be deleted is found */
-  public void deleteUserMessage(Message deleteMessage, UUID userId){
-    List<Message> userMessages = getUserMessages(userId);
-    if (deleteMessage.getAuthorId().equals(userId)){
-      for (Message message : userMessages){
+  public void deleteUserMessage(UUID userId, Message deleteMessage){
+     List<Message> conversationMessages = getMessagesInConversation(deleteMessage.getConversationId());
+    // if (deleteMessage.getAuthorId().equals(userId)){
+      for (Message message : conversationMessages){
         if (message.getId().equals(deleteMessage.getId())){
-          deleteMessage.addDeleteForUser(deleteMessage);
+          deleteMessage.addDeleteForUser(userId);
           removeMessageFromDisplay(userId);
           // display success message
           // call method that loops through all the user's messages
           // if the message's delete is not null then hide the message
         }
-      }
+      //}
     }
     //else: display error message
   }
