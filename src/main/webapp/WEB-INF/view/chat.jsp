@@ -34,6 +34,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       height: 500px;
       overflow-y: scroll
     }
+    a.delete-button {
+      visibility: hidden;
+    }
   </style>
 
   <script>
@@ -64,20 +67,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <button onclick="deleteButtons()">Delete</button>
     <hr/>
 
-    <div id="chat_with_delete" style="display:none;">
-      <ul>
-    <%
-      for (Message message : messages) {
-        String author = UserStore.getInstance()
-          .getUser(message.getAuthorId()).getName();
-    %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %> <div align="right"> <a href="/about.jsp">delete</a></div></li>
-    <%
-      }
-    %>
-      </ul>
-    </div>
-
     <div id="chat">
       <ul>
     <%
@@ -85,7 +74,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
+      <li><strong><%= author %>:</strong> <%= message.getContent() %><div align="right"> <a class="delete-button" href="/about.jsp">delete</a></div></li>
     <%
       }
     %>
@@ -94,15 +83,14 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <script>
         function deleteButtons() {
-          var chatWithDiv = document.getElementById('chat_with_delete');
-          var chatDiv = document.getElementById('chat');
-          if (chatWithDiv.style.display === "none") {
-            chatWithDiv.style.display = 'block';
-            chatDiv.style.display = 'none';
-          } else {
-            chatDiv.style.display = 'block';
-            chatWithDiv.style.display = 'none';
-          } 
+          var delete_buttons = document.getElementByClassName("delete-button");
+          for (button: delete_buttons){
+            if (button.style.visibility === "hidden") {
+              button.style.visibility = "visible";
+            } else {
+              button.style.visibility = "hidden";
+            } 
+          }
         }
     </script>
 
