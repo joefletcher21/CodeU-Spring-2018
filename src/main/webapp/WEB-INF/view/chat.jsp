@@ -85,10 +85,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         <input type="text" name="message">
          Style characters (Put the text you want styled in place of the dots)
 	       <ul>  
-	         "     Bold: <b>...</b>
-	         Italics: <i>...</i>
-	         Underline: <u>...</u>
-	         Strikethrough: <strike>...</strike>"
+	         Bold: &lt;b&gt;...&lt;/b&gt
+	         Italics: &lt;i&gt;...&lt;/i&gt
+	         Underline: &lt;u&gt;...&lt;/u&gt
+	         Strikethrough: &lt;strike&gt;...&lt;/strike&gt
            </ul>
         <br/>
         <button type="submit">Send</button>
