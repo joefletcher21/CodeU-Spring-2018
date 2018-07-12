@@ -30,7 +30,7 @@ public class MessageTest {
     UUID author = UUID.randomUUID();
     String content = "test content";
     Instant creation = Instant.now();
-    List<Message> deleteForUser = new ArrayList<Message> ();
+    List<UUID> deleteForUser = new ArrayList<Message> ();
 
     Message message = new Message(id, conversation, author, content, creation, deleteForUser );
 
@@ -39,7 +39,7 @@ public class MessageTest {
     Assert.assertEquals(author, message.getAuthorId());
     Assert.assertEquals(content, message.getContent());
     Assert.assertEquals(creation, message.getCreationTime());
-    message.addDeleteForUser(message);
+    message.addDeleteForUser(id);
     Assert.assertEquals(deleteForUser, message.getDeleteForUser());
   }
 }

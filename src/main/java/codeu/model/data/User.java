@@ -35,14 +35,14 @@ public class User {
    * @param creation the creation time of this User
    * @param isAdmin whether or not the user is an administrator
    */
-  public User(UUID id, String name, String passwordHash, Instant creation, boolean isAdmin) {
+  public User(UUID id, String name, String passwordHash, Instant creation, boolean isAdmin, String aboutMe) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
     this.isAdmin = isAdmin;
-    // this.aboutMe = aboutMe;
-    this.aboutMe = "";
+    this.aboutMe = aboutMe;
+    // this.aboutMe = "";
   }
 
   /** Returns the ID of this User. */
