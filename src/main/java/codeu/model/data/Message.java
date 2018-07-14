@@ -17,7 +17,7 @@ package codeu.model.data;
 import java.time.Instant;
 import java.util.UUID;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
 public class Message {
@@ -27,7 +27,7 @@ public class Message {
   private final UUID author;
   private final String content;
   private final Instant creation;
-  private final List<UUID> deleteForUser;
+  private final HashSet<UUID> deleteForUser;
 
   /**
    * Constructs a new Message.
@@ -38,7 +38,7 @@ public class Message {
    * @param content the text content of this Message
    * @param creation the creation time of this Message
    */
-  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation, List<UUID> deleteForUser) {
+  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation, HashSet<UUID> deleteForUser) {
     this.id = id;
     this.conversation = conversation;
     this.author = author;
@@ -72,7 +72,7 @@ public class Message {
     return creation;
   }
   /** returns list of users that have "deleted" the selected message */
-  public List<UUID> getDeleteForUser(){
+  public HashSet<UUID> getDeleteForUser(){
     return deleteForUser;
   }
 

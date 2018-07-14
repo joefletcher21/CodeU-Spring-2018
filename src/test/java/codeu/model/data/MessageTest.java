@@ -19,7 +19,7 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MessageTest {
 
@@ -30,7 +30,7 @@ public class MessageTest {
     UUID author = UUID.randomUUID();
     String content = "test content";
     Instant creation = Instant.now();
-    List<UUID> deleteForUser = new ArrayList<Message> ();
+    HashSet<UUID> deleteForUser = new HashSet<UUID> ();
 
     Message message = new Message(id, conversation, author, content, creation, deleteForUser );
 
