@@ -83,8 +83,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <script>
         function deleteButtons() {
-          var delete_buttons = document.getElementByClassName("delete-button");
-          for (button: delete_buttons){
+          var delete_buttons = document.getElementsByClassName("delete-button");
+          for (var button of delete_buttons){
+            console.log(button);
             if (button.style.visibility === "hidden") {
               button.style.visibility = "visible";
             } else {
