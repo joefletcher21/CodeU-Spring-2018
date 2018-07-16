@@ -74,7 +74,11 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %><div align="right"> <a class="delete-button" href="/about.jsp">delete</a></div></li>
+      <li><strong><%= author %>:</strong> <%= message.getContent() %>
+        <div align="right"> 
+          <a class="delete-button" href="/delete/<% message.getId() %>" method="POST">delete</a>
+        </div>
+      </li>
     <%
       }
     %>
