@@ -32,7 +32,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
 /** Servlet class responsible for the chat page. */
-public class ChatServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 
   /** Store class that gives access to Conversations. */
   private ConversationStore conversationStore;
@@ -85,12 +85,12 @@ public class ChatServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
-    String conversationTitle = requestUrl.substring("/chat/".length());
+    String messageId = requestUrl.substring("/delete/".length());
 
-    Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    if (conversation == null) {
+    Message message = messageStore.getMessageWithId(messageId);
+    if (message == null) {
       // couldn't find conversation, redirect to conversation list
-      System.out.println("Conversation was null: " + conversationTitle);
+      System.out.println("Message was null: " + messageId);
       response.sendRedirect("/conversations");
       return;
     }
@@ -133,14 +133,14 @@ public class ChatServlet extends HttpServlet {
 
     Message message = messageStore.getMessageWithId(messageId);
     if (message == null) {
-      // couldn't find conversation, redirect to conversation list
-      response.sendRedirect("/conversations");
-      return;
+      // couldn't find message
+      return false;
     }
     // add if else to deal with notifications
-    deleteMessage = messageStore.deleteUserMessage(username, message)
-    if deleteMessage {
+    deleteMessage = messageStore.deleteUserMessage(username, message);
+    if (deleteMessage) {
       response.sendRedirect("/delete/" +  messageId);
+      return true;
     }else{
       return deleteMessage;
     }
