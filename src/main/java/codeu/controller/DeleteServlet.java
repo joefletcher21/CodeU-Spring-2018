@@ -95,7 +95,7 @@ public class DeleteServlet extends HttpServlet {
       return;
     }
 
-    UUID conversationId = conversation.getId();
+    UUID conversationId = message.getConversationId();
 
     List<Message> messages = messageStore.getMessagesInConversation(conversationId);
 
@@ -130,8 +130,9 @@ public class DeleteServlet extends HttpServlet {
 
     String requestUrl = request.getRequestURI();
     String messageId = requestUrl.substring("/delete/".length());
+    UUID userId = user.getId();
 
-    Message message = messageStore.getMessageWithId(messageId);
+    Message message = messageStore.getMessageWithId(messageId, userId);
     if (message == null) {
       // couldn't find message
       return false;
@@ -140,7 +141,7 @@ public class DeleteServlet extends HttpServlet {
     deleteMessage = messageStore.deleteUserMessage(username, message);
     if (deleteMessage) {
       response.sendRedirect("/delete/" +  messageId);
-      return true;
+      return deleteMessage;
     }else{
       return deleteMessage;
     }
