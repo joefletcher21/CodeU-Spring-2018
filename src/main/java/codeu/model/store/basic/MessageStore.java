@@ -136,5 +136,14 @@ public class MessageStore {
     }
 
   }
+  /** Find and return the Message with the given title. */
+  public Message getMessageWithId(String messageId) {
+    for (Message message : messages) {
+      if (message.getId().equals(messageId)) {
+        return message;
+      }
+    }
+    return null;
+  }
 
 }
