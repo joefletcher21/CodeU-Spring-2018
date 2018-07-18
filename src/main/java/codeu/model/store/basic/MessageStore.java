@@ -117,7 +117,7 @@ public class MessageStore {
       for (Message message : conversationMessages){
         if (message.getId().equals(deleteMessage.getId())){
           deleteMessage.addDeleteForUser(userId);
-          removeMessageFromDisplay(userId);
+
           // display success message:
           return true;
         }
@@ -126,16 +126,6 @@ public class MessageStore {
     return false;
   }
 
-  /** removes the message from users display */
-  public void removeMessageFromDisplay(UUID userId){
-    List<Message> userMessages = getUserMessages(userId);
-    for (Message message:userMessages){
-      if (message.getDeleteForUser().contains(userId)){
-        // HIDE THE MESSAGE FROM DISPLAY
-      }
-    }
-
-  }
   /** Find and return the Message with the given title. */
   public Message getMessageWithId(String messageId) {
     for (Message message : messages) {
@@ -147,3 +137,4 @@ public class MessageStore {
   }
 
 }
+

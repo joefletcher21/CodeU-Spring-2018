@@ -86,6 +86,9 @@ public class DeleteServlet extends HttpServlet {
       throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
     String messageId = requestUrl.substring("/delete/".length());
+    String username = (String) request.getSession().getAttribute("user");
+    User user = userStore.getUser(username);
+    UUID userId = user.getId();
 
     Message message = messageStore.getMessageWithId(messageId);
     if (message == null) {
@@ -96,8 +99,9 @@ public class DeleteServlet extends HttpServlet {
     }
 
     UUID conversationId = message.getConversationId();
+    Conversation conversation = conversationStore.getConversationWithId(conversationId);
 
-    List<Message> messages = messageStore.getMessagesInConversation(conversationId);
+    List<Message> messages = messageStore.getMessagesInConversation(conversationId, userId);
 
     request.setAttribute("conversation", conversation);
     request.setAttribute("messages", messages);
@@ -132,13 +136,13 @@ public class DeleteServlet extends HttpServlet {
     String messageId = requestUrl.substring("/delete/".length());
     UUID userId = user.getId();
 
-    Message message = messageStore.getMessageWithId(messageId, userId);
+    Message message = messageStore.getMessageWithId(messageId);
     if (message == null) {
       // couldn't find message
       return false;
     }
     // add if else to deal with notifications
-    deleteMessage = messageStore.deleteUserMessage(username, message);
+    boolean deleteMessage = messageStore.deleteUserMessage(userId, message);
     if (deleteMessage) {
       response.sendRedirect("/delete/" +  messageId);
       return deleteMessage;
