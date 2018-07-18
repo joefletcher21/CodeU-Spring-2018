@@ -78,12 +78,12 @@ public class MessageStore {
   }
 
   /** Access the current set of Messages within the given Conversation. */
-  public List<Message> getMessagesInConversation(UUID conversationId) {
+  public List<Message> getMessagesInConversation(UUID conversationId, UUID userId) {
 
     List<Message> messagesInConversation = new ArrayList<>();
 
     for (Message message : messages) {
-      if (message.getConversationId().equals(conversationId)) {
+      if (message.getConversationId().equals(conversationId) && (!message.getDeleteForUser().contains(userId))) {
         messagesInConversation.add(message);
       }
     }
@@ -109,4 +109,29 @@ public class MessageStore {
   public void setMessages(List<Message> messages) {
     this.messages = messages;
   }
+
+  /** loops through all of users messages until message to be deleted is found */
+  public boolean deleteUserMessage(UUID userId, Message deleteMessage){
+     List<Message> conversationMessages = getMessagesInConversation(deleteMessage.getConversationId(), userId);
+    // if (deleteMessage.getAuthorId().equals(userId)){
+      for (Message message : conversationMessages){
+        if (message.getId().equals(deleteMessage.getId())){
+          deleteMessage.addDeleteForUser(userId);
+          // display success message:
+          return true;
+        }
+    }
+    //else: display error message:
+    return false;
+  }
+  /** Find and return the Message with the given title. */
+  public Message getMessageWithId(String messageId) {
+    for (Message message : messages) {
+      if (message.getId().equals(messageId)) {
+        return message;
+      }
+    }
+    return null;
+  }
 }
+
