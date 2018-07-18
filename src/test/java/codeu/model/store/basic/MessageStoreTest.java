@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import java.util.HashSet;
 
 
 public class MessageStoreTest {
@@ -19,6 +20,8 @@ public class MessageStoreTest {
 
   private final UUID CONVERSATION_ID_ONE = UUID.randomUUID();
   private final UUID currentUser = UUID.randomUUID();
+  private final HashSet<UUID> emptyHash = new HashSet<UUID>();
+
   private final Message MESSAGE_ONE =
       new Message(
           UUID.randomUUID(),
@@ -26,7 +29,7 @@ public class MessageStoreTest {
           UUID.randomUUID(),
           "message one",
           Instant.ofEpochMilli(1000),
-          null);
+          emptyHash);
   private final Message MESSAGE_TWO =
       new Message(
           UUID.randomUUID(),
@@ -34,7 +37,7 @@ public class MessageStoreTest {
           UUID.randomUUID(),
           "message two",
           Instant.ofEpochMilli(2000),
-          null);
+          emptyHash);
   private final Message MESSAGE_THREE =
       new Message(
           UUID.randomUUID(),
@@ -42,7 +45,7 @@ public class MessageStoreTest {
           UUID.randomUUID(),
           "message three",
           Instant.ofEpochMilli(3000),
-          null);
+          emptyHash);
 
   @Before
   public void setup() {
@@ -69,6 +72,7 @@ public class MessageStoreTest {
   public void testAddMessage() {
     UUID inputConversationId = UUID.randomUUID();
 
+
     Message inputMessage =
         new Message(
             UUID.randomUUID(),
@@ -76,7 +80,7 @@ public class MessageStoreTest {
             UUID.randomUUID(),
             "test message",
             Instant.now(),
-            null);
+            emptyHash);
 
     messageStore.addMessage(inputMessage);
     Message resultMessage = messageStore.getMessagesInConversation(inputConversationId, currentUser).get(0);

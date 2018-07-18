@@ -35,6 +35,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import java.util.HashSet;
+import codeu.model.store.persistence.PersistentStorageAgent;
+import org.mockito.Mockito;
 
 public class ChatServletTest {
 
@@ -75,13 +78,29 @@ public class ChatServletTest {
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 
     UUID fakeConversationId = UUID.randomUUID();
-    UUID fakeUserId = UUID.randomUUID();
+    UUID id = UUID.randomUUID();
+    String name = "test_username";
+    String passwordHash = "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy";
+    Instant creation = Instant.now();
+    boolean isAdmin= false;
+    String aboutMe = "Test user's about me section";
+
+    User user = new User(id, name, passwordHash, creation, isAdmin, aboutMe);
+    mockRequest.getSession().setAttribute("user",name);
+
+
+    PersistentStorageAgent mockPersistentStorageAgent;
+    mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
+    UserStore userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
+    userStore.addUser(user);
+
     Conversation fakeConversation =
         new Conversation(fakeConversationId, UUID.randomUUID(), "test_conversation", Instant.now());
     Mockito.when(mockConversationStore.getConversationWithTitle("test_conversation"))
         .thenReturn(fakeConversation);
 
     List<Message> fakeMessageList = new ArrayList<>();
+    HashSet<UUID> emptyHash = new HashSet<UUID>();
     fakeMessageList.add(
         new Message(
             UUID.randomUUID(),
@@ -89,8 +108,8 @@ public class ChatServletTest {
             UUID.randomUUID(),
             "test message",
             Instant.now(),
-            null));
-    Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId, fakeUserId))
+            emptyHash));
+    Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId, id))
         .thenReturn(fakeMessageList);
 
     chatServlet.doGet(mockRequest, mockResponse);
