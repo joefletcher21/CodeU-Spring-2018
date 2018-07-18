@@ -82,9 +82,19 @@ public class MessageStore {
 
     List<Message> messagesInConversation = new ArrayList<>();
 
-    for (Message message : messages) {
-      if (message.getConversationId().equals(conversationId) && (!message.getDeleteForUser().contains(userId))) {
-        messagesInConversation.add(message);
+    if (userId != null){
+      for (Message message : messages) {
+        if (message.getConversationId().equals(conversationId) && (!message.getDeleteForUser().contains(userId))) {
+          messagesInConversation.add(message);
+        }
+      }
+    }
+
+    else {
+      for (Message message : messages) {
+        if (message.getConversationId().equals(conversationId)) {
+          messagesInConversation.add(message);
+        }
       }
     }
 
@@ -137,4 +147,3 @@ public class MessageStore {
   }
 
 }
-

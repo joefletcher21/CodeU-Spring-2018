@@ -18,6 +18,7 @@ public class MessageStoreTest {
   private PersistentStorageAgent mockPersistentStorageAgent;
 
   private final UUID CONVERSATION_ID_ONE = UUID.randomUUID();
+  private final UUID currentUser = UUID.randomUUID();
   private final Message MESSAGE_ONE =
       new Message(
           UUID.randomUUID(),
@@ -57,7 +58,7 @@ public class MessageStoreTest {
 
   @Test
   public void testGetMessagesInConversation() {
-    List<Message> resultMessages = messageStore.getMessagesInConversation(CONVERSATION_ID_ONE);
+    List<Message> resultMessages = messageStore.getMessagesInConversation(CONVERSATION_ID_ONE, currentUser);
 
     Assert.assertEquals(2, resultMessages.size());
     assertEquals(MESSAGE_ONE, resultMessages.get(0));
@@ -67,6 +68,7 @@ public class MessageStoreTest {
   @Test
   public void testAddMessage() {
     UUID inputConversationId = UUID.randomUUID();
+
     Message inputMessage =
         new Message(
             UUID.randomUUID(),
@@ -77,7 +79,7 @@ public class MessageStoreTest {
             null);
 
     messageStore.addMessage(inputMessage);
-    Message resultMessage = messageStore.getMessagesInConversation(inputConversationId).get(0);
+    Message resultMessage = messageStore.getMessagesInConversation(inputConversationId, currentUser).get(0);
 
     assertEquals(inputMessage, resultMessage);
     Mockito.verify(mockPersistentStorageAgent).writeThrough(inputMessage);

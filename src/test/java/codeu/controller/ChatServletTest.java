@@ -75,6 +75,7 @@ public class ChatServletTest {
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 
     UUID fakeConversationId = UUID.randomUUID();
+    UUID fakeUserId = UUID.randomUUID();
     Conversation fakeConversation =
         new Conversation(fakeConversationId, UUID.randomUUID(), "test_conversation", Instant.now());
     Mockito.when(mockConversationStore.getConversationWithTitle("test_conversation"))
@@ -89,7 +90,7 @@ public class ChatServletTest {
             "test message",
             Instant.now(),
             null));
-    Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId))
+    Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId, fakeUserId))
         .thenReturn(fakeMessageList);
 
     chatServlet.doGet(mockRequest, mockResponse);

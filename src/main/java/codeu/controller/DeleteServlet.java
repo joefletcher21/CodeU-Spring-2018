@@ -139,17 +139,20 @@ public class DeleteServlet extends HttpServlet {
     Message message = messageStore.getMessageWithId(messageId);
     if (message == null) {
       // couldn't find message
-      return false;
+      response.sendRedirect("/login");
+      return;
     }
     // add if else to deal with notifications
     boolean deleteMessage = messageStore.deleteUserMessage(userId, message);
     if (deleteMessage) {
       response.sendRedirect("/delete/" +  messageId);
-      return deleteMessage;
+      return;
+      
     }else{
-      return deleteMessage;
+      response.sendRedirect("/login");
+      return;
     }
     // redirect to a GET request
-    
+
   }
 }

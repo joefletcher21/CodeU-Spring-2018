@@ -96,8 +96,11 @@ public class ChatServlet extends HttpServlet {
     }
 
     UUID conversationId = conversation.getId();
+    String username = (String) request.getSession().getAttribute("user");
+    User user = userStore.getUser(username);
+    UUID userId = user.getId();
 
-    List<Message> messages = messageStore.getMessagesInConversation(conversationId);
+    List<Message> messages = messageStore.getMessagesInConversation(conversationId,userId);
 
     request.setAttribute("conversation", conversation);
     request.setAttribute("messages", messages);
