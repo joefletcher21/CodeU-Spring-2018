@@ -77,7 +77,8 @@ public class LoginServletTest {
             "test username",
             "$2a$10$.e.4EEfngEXmxAO085XnYOmDntkqod0C384jOR9oagwxMnPNHaGLa",
             Instant.now(),
-            false);
+            false,
+            "Test user's about me section");
 
     Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
     Mockito.when(mockRequest.getParameter("password")).thenReturn("test password");

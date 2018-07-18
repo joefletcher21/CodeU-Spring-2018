@@ -117,6 +117,7 @@ public class MessageStore {
       for (Message message : conversationMessages){
         if (message.getId().equals(deleteMessage.getId())){
           deleteMessage.addDeleteForUser(userId);
+
           // display success message:
           return true;
         }
@@ -124,6 +125,7 @@ public class MessageStore {
     //else: display error message:
     return false;
   }
+
   /** Find and return the Message with the given title. */
   public Message getMessageWithId(String messageId) {
     for (Message message : messages) {
@@ -133,5 +135,6 @@ public class MessageStore {
     }
     return null;
   }
+
 }
 

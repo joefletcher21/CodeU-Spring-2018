@@ -18,6 +18,8 @@ import java.time.Instant;
 import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
+import java.util.List;
+import java.util.HashSet;
 
 public class MessageTest {
 
@@ -28,13 +30,16 @@ public class MessageTest {
     UUID author = UUID.randomUUID();
     String content = "test content";
     Instant creation = Instant.now();
+    HashSet<UUID> deleteForUser = new HashSet<UUID> ();
 
-    Message message = new Message(id, conversation, author, content, creation);
+    Message message = new Message(id, conversation, author, content, creation, deleteForUser );
 
     Assert.assertEquals(id, message.getId());
     Assert.assertEquals(conversation, message.getConversationId());
     Assert.assertEquals(author, message.getAuthorId());
     Assert.assertEquals(content, message.getContent());
     Assert.assertEquals(creation, message.getCreationTime());
+    message.addDeleteForUser(id);
+    Assert.assertEquals(deleteForUser, message.getDeleteForUser());
   }
 }

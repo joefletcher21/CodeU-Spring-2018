@@ -52,7 +52,8 @@ public class PersistentStorageAgentTest {
             "test_username",
             "$2a$10$5GNCbSPS1sqqM9.hdiE2hexn1w.vnNoR.CaHIztFEhdAD7h82tqX.",
             Instant.now(),
-            false);
+            false,
+            "Test user's about me section");
     persistentStorageAgent.writeThrough(user);
     Mockito.verify(mockPersistentDataStore).writeThrough(user);
   }
@@ -69,7 +70,7 @@ public class PersistentStorageAgentTest {
   public void testWriteThroughMessage() {
     Message message =
         new Message(
-            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", Instant.now());
+            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", Instant.now(), null);
     persistentStorageAgent.writeThrough(message);
     Mockito.verify(mockPersistentDataStore).writeThrough(message);
   }
