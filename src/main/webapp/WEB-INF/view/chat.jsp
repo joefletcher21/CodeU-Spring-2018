@@ -34,6 +34,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       height: 500px;
       overflow-y: scroll
     }
+    a.delete-button {
+      visibility: hidden;
+    }
   </style>
 
   <script>
@@ -61,7 +64,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <h1><%= conversation.getTitle() %>
       <a href="" style="float: right">&#8635;</a></h1>
-
+    <button onclick="deleteButtons()">Delete</button>
     <hr/>
 
     <div id="chat">
@@ -71,12 +74,30 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
+      <li><strong><%= author %>:</strong> <%= message.getContent() %>
+        <div align="right"> 
+          <a class="delete-button" href="/delete/<% message.getId() %>" method="POST">delete</a>
+        </div>
+      </li>
     <%
       }
     %>
       </ul>
     </div>
+
+    <script>
+        function deleteButtons() {
+          var delete_buttons = document.getElementsByClassName("delete-button");
+          for (var button of delete_buttons){
+            console.log(button);
+            if (button.style.visibility === "hidden") {
+              button.style.visibility = "visible";
+            } else {
+              button.style.visibility = "hidden";
+            } 
+          }
+        }
+    </script>
 
     <hr/>
 
