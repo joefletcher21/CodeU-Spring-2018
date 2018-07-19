@@ -75,8 +75,6 @@ public class ChatServletTest {
 
   @Test
   public void testDoGet() throws IOException, ServletException {
-    Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
-
     UUID fakeConversationId = UUID.randomUUID();
     UUID id = UUID.randomUUID();
     String name = "test_username";
@@ -84,18 +82,24 @@ public class ChatServletTest {
     Instant creation = Instant.now();
     boolean isAdmin= false;
     String aboutMe = "Test user's about me section";
-
     User user = new User(id, name, passwordHash, creation, isAdmin, aboutMe);
-    mockRequest.getSession().setAttribute("user",name);
+    System.out.println("\n \n \n IN THE CHAT SERVLET TEST PRINTING THE USER: "+user+ " \n\n\n");
+
+    // PersistentStorageAgent mockPersistentStorageAgent;
+    // mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
+    //UserStore userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
+    mockUserStore.addUser(user);
+    System.out.println("\n \n \n  ALL USER in ChatSerlet TEST "+mockUserStore.getAllUsers()+ "\n \n \n ");
+
+    User FAKEUSER = mockUserStore.getUser(id);
+    System.out.println("\n \n \n  FAKE USER in ChatSerlet TEST "+FAKEUSER+ "\n \n \n ");
 
 
-    PersistentStorageAgent mockPersistentStorageAgent;
-    mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
-    UserStore userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
-    userStore.addUser(user);
+    Mockito.when(mockSession.getAttribute("user")).thenReturn(name);
+    Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 
     Conversation fakeConversation =
-        new Conversation(fakeConversationId, UUID.randomUUID(), "test_conversation", Instant.now());
+        new Conversation(fakeConversationId, id, "test_conversation", Instant.now());
     Mockito.when(mockConversationStore.getConversationWithTitle("test_conversation"))
         .thenReturn(fakeConversation);
 
@@ -105,7 +109,7 @@ public class ChatServletTest {
         new Message(
             UUID.randomUUID(),
             fakeConversationId,
-            UUID.randomUUID(),
+            id,
             "test message",
             Instant.now(),
             emptyHash));
