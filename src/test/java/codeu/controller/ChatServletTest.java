@@ -83,13 +83,13 @@ public class ChatServletTest {
     Instant creation = Instant.now();
     boolean isAdmin= false;
     String aboutMe = "Test user's about me section";
-    User user = 
+    User user =
       new User(
-        id, 
-        name, 
-        passwordHash, 
-        creation, 
-        isAdmin, 
+        id,
+        name,
+        passwordHash,
+        creation,
+        isAdmin,
         aboutMe);
     System.out.println("\n \n \n IN THE CHAT SERVLET TEST PRINTING THE USER: "+user+ " \n\n\n");
 
@@ -103,7 +103,7 @@ public class ChatServletTest {
     System.out.println("\n \n \n  FAKE USER in ChatSerlet TEST "+FAKEUSER+ "\n \n \n ");
 
 
-    
+
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 
     Conversation fakeConversation =

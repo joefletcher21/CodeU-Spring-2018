@@ -75,8 +75,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
           .getUser(message.getAuthorId()).getName();
     %>
       <li><strong><%= author %>:</strong> <%= message.getContent() %>
-        <div align="right"> 
-          <a class="delete-button" href="/delete/<% message.getId() %>" method="POST">delete</a>
+        <div align="right">
+          <a class="delete-button" href="/delete/<%= message.getId() %>" method="POST">delete</a>
         </div>
       </li>
     <%
@@ -94,7 +94,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
               button.style.visibility = "visible";
             } else {
               button.style.visibility = "hidden";
-            } 
+            }
           }
         }
     </script>
@@ -105,7 +105,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
         <input type="text" name="message">
          Style characters (Put the text you want styled in place of the dots)
-	       <ul>  
+	       <ul>
 	         Bold: &lt;b&gt;...&lt;/b&gt
 	         Italics: &lt;i&gt;...&lt;/i&gt
 	         Underline: &lt;u&gt;...&lt;/u&gt
