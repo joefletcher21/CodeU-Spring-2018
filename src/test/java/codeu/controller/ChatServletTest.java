@@ -75,6 +75,7 @@ public class ChatServletTest {
 
   @Test
   public void testDoGet() throws IOException, ServletException {
+    Mockito.when(mockSession.getAttribute("user")).thenReturn("test_username");
     UUID fakeConversationId = UUID.randomUUID();
     UUID id = UUID.randomUUID();
     String name = "test_username";
@@ -82,20 +83,27 @@ public class ChatServletTest {
     Instant creation = Instant.now();
     boolean isAdmin= false;
     String aboutMe = "Test user's about me section";
-    User user = new User(id, name, passwordHash, creation, isAdmin, aboutMe);
+    User user = 
+      new User(
+        id, 
+        name, 
+        passwordHash, 
+        creation, 
+        isAdmin, 
+        aboutMe);
     System.out.println("\n \n \n IN THE CHAT SERVLET TEST PRINTING THE USER: "+user+ " \n\n\n");
 
     // PersistentStorageAgent mockPersistentStorageAgent;
     // mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
     //UserStore userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
-    mockUserStore.addUser(user);
+    Mockito.when(mockUserStore.getUser("test_username")).thenReturn(user);
     System.out.println("\n \n \n  ALL USER in ChatSerlet TEST "+mockUserStore.getAllUsers()+ "\n \n \n ");
 
     User FAKEUSER = mockUserStore.getUser(id);
     System.out.println("\n \n \n  FAKE USER in ChatSerlet TEST "+FAKEUSER+ "\n \n \n ");
 
 
-    Mockito.when(mockSession.getAttribute("user")).thenReturn(name);
+    
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 
     Conversation fakeConversation =
