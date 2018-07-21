@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import java.util.HashSet;
 import org.junit.Test;
 
 /**
@@ -121,16 +122,19 @@ public class PersistentDataStoreTest {
     UUID authorOne = UUID.fromString("10000002-2222-3333-4444-555555555555");
     String contentOne = "test content one";
     Instant creationOne = Instant.ofEpochMilli(1000);
+    HashSet<UUID> hashOne = new HashSet<UUID>();
+
     Message inputMessageOne =
-        new Message(idOne, conversationOne, authorOne, contentOne, creationOne, null);
+        new Message(idOne, conversationOne, authorOne, contentOne, creationOne, hashOne);
 
     UUID idTwo = UUID.fromString("10000003-2222-3333-4444-555555555555");
     UUID conversationTwo = UUID.fromString("10000004-2222-3333-4444-555555555555");
     UUID authorTwo = UUID.fromString("10000005-2222-3333-4444-555555555555");
     String contentTwo = "test content one";
     Instant creationTwo = Instant.ofEpochMilli(2000);
+    HashSet<UUID> hashTwo = new HashSet<UUID>();
     Message inputMessageTwo =
-        new Message(idTwo, conversationTwo, authorTwo, contentTwo, creationTwo, null);
+        new Message(idTwo, conversationTwo, authorTwo, contentTwo, creationTwo, hashTwo);
 
     // save
     persistentDataStore.writeThrough(inputMessageOne);

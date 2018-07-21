@@ -83,7 +83,11 @@ public class MessageStore {
     List<Message> messagesInConversation = new ArrayList<>();
 
     if (userId != null){
+      System.out.println("\n \n \n THE USER ID IN MESSAGE STORE IS not NULL \n \n \n");
       for (Message message : messages) {
+          System.out.println("\n \n \n message.getConversationId "+ message.getConversationId()+"\n \n \n");
+          System.out.println("\n \n \n message.getDeleteForUser() "+message.getDeleteForUser()+"\n\n\n");
+
         if (message.getConversationId().equals(conversationId) && (!message.getDeleteForUser().contains(userId))) {
           messagesInConversation.add(message);
         }

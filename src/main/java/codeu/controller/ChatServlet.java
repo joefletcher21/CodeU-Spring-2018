@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -98,8 +99,11 @@ public class ChatServlet extends HttpServlet {
     UUID conversationId = conversation.getId();
     String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
-    System.out.println("\n \n \n  USER in ChatSerlet "+user+ "\n \n \n ");
     UUID userId = user.getId();
+
+    System.out.println("\n \n \n  USER ID in ChatSerlet "+userId+ "\n \n \n ");
+
+    System.out.println("\n \n \n  Conversation ID in ChatSerlet "+conversationId+ "\n \n \n ");
 
     List<Message> messages = messageStore.getMessagesInConversation(conversationId,userId);
 
@@ -147,7 +151,7 @@ public class ChatServlet extends HttpServlet {
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.basic());
-
+    HashSet<UUID> deleteHash = new HashSet<UUID>();
     Message message =
         new Message(
             UUID.randomUUID(),
@@ -155,7 +159,7 @@ public class ChatServlet extends HttpServlet {
             user.getId(),
             messageContent,
             Instant.now(),
-            null);
+            deleteHash);
 
     messageStore.addMessage(message);
 
