@@ -35,7 +35,7 @@
 
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-      <a href="/profile">Profile</a>
+      <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
       <a href="/conversations">Conversations</a>
       <a href="/activityfeed">Activity</a>
       <a href="/admin">Admin</a>

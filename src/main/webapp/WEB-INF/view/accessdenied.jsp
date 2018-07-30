@@ -15,7 +15,7 @@
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
-    <a href="/profile">Profile</a>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
     <a href="/activityfeed">Activity</a>
     <a href="/admin">Admin</a>
   </nav>
@@ -26,7 +26,7 @@
 
       <h1>Access Denied</h1>
       <p>you must be an admin to access this page<p>
-        
+
     </div>
   </div>
 </body>
