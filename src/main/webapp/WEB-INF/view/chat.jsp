@@ -55,7 +55,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
       <a href="/conversations">Conversations</a>
-      <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
+      <a href="/profile">Profile</a>
       <a href="/activityfeed">Activity</a>
       <a href="/admin">Admin</a>
     <% } else{ %>
@@ -79,7 +79,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
           .getUser(message.getAuthorId()).getName();
 
     %>
-<<<<<<< HEAD
       <%-- <li><strong><%= author %>:</strong> <%= message.getContent() %>
         <div align="right">
           <a class="delete-button" href="conversation/">delete</a>
@@ -90,9 +89,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       <div align="right">
         <a class="delete-button" href="/about.jsp">delete</a></div>
       </li>
-=======
-      <li><strong><%= author %>:</strong> <%= message.getContent() %><div align="right"> <a class="delete-button" href="/about.jsp">delete</a></div></li>
->>>>>>> 0b69b52b7b661f56836ed66c3ae27a78658ba0e0
     <%
       }
     %>
@@ -103,7 +99,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         function deleteButtons() {
           var delete_buttons = document.getElementsByClassName("delete-button");
           for (var button of delete_buttons){
-<<<<<<< HEAD
 
             if (button.style.visibility === "hidden") {
               button.style.visibility = "visible";
@@ -111,14 +106,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
             } else {
               button.style.visibility = "hidden";
             }
-=======
-            console.log(button);
-            if (button.style.visibility === "hidden") {
-              button.style.visibility = "visible";
-            } else {
-              button.style.visibility = "hidden";
-            }
->>>>>>> 0b69b52b7b661f56836ed66c3ae27a78658ba0e0
           }
         }
     </script>
@@ -129,19 +116,11 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
         <input type="text" name="message">
          Style characters (Put the text you want styled in place of the dots)
-<<<<<<< HEAD
-	       <ul>
-	         Bold: &lt;b&gt;...&lt;/b&gt
-	         Italics: &lt;i&gt;...&lt;/i&gt
-	         Underline: &lt;u&gt;...&lt;/u&gt
-	         Strikethrough: &lt;strike&gt;...&lt;/strike&gt
-=======
          <ul>
-           "     Bold: <b>...</b>
+           "Bold: <b>...</b>
            Italics: <i>...</i>
            Underline: <u>...</u>
            Strikethrough: <strike>...</strike>"
->>>>>>> 0b69b52b7b661f56836ed66c3ae27a78658ba0e0
            </ul>
         <br/>
         <button type="submit">Send</button>
