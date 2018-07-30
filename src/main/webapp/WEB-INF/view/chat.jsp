@@ -52,9 +52,13 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <nav>
     <a id="navTitle" href="/">The Chat in the Hat</a>
     <a href="/conversations">Conversations</a>
-      <% if (request.getSession().getAttribute("user") != null) { %>
-    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else { %>
+    <% if(request.getSession().getAttribute("user") != null){ %>
+      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
+      <a href="/conversations">Conversations</a>
+      <a href="/profile">Profile</a>
+      <a href="/activityfeed">Activity</a>
+      <a href="/admin">Admin</a>
+    <% } else{ %>
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
@@ -73,11 +77,17 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       for (Message message : messages) {
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
+
     %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %>
+      <%-- <li><strong><%= author %>:</strong> <%= message.getContent() %>
         <div align="right">
-          <a class="delete-button" href="/delete/<%= message.getId() %>" method="POST">delete</a>
+          <a class="delete-button" href="conversation/">delete</a>
         </div>
+      </li> --%>
+
+      <li><strong><%= author %>:</strong> <%= message.getContent() %>
+      <div align="right">
+        <a class="delete-button" href="/about.jsp">delete</a></div>
       </li>
     <%
       }
@@ -89,9 +99,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         function deleteButtons() {
           var delete_buttons = document.getElementsByClassName("delete-button");
           for (var button of delete_buttons){
-            console.log(button);
+
             if (button.style.visibility === "hidden") {
               button.style.visibility = "visible";
+              console.log(button);
             } else {
               button.style.visibility = "hidden";
             }
