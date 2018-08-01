@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Servlet class responsible for the chat page. */
+/** Servlet class responsible for the delete. */
 public class DeleteServlet extends HttpServlet {
 
   /** Store class that gives access to Conversations. */

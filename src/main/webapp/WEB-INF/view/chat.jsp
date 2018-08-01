@@ -79,15 +79,12 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
           .getUser(message.getAuthorId()).getName();
 
     %>
-      <%-- <li><strong><%= author %>:</strong> <%= message.getContent() %>
-        <div align="right">
-          <a class="delete-button" href="conversation/">delete</a>
-        </div>
-      </li> --%>
-
       <li><strong><%= author %>:</strong> <%= message.getContent() %>
       <div align="right">
-        <a class="delete-button" href="/about.jsp">delete</a></div>
+        <form action="/delete/<%= message.getId() %>" method= "POST" class="delete-button">
+        <button type="submit">delete</button>
+        </form>
+      </div>
       </li>
     <%
       }
