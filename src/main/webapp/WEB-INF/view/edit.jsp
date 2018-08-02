@@ -33,7 +33,6 @@
     <% if(request.getSession().getAttribute("user") != null){ %>
       <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
     <% } %>
-    <a href="/activityfeed">Activity</a>
   </nav>
 
   <div id="container">

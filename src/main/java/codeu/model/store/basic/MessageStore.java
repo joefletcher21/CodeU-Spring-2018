@@ -129,6 +129,8 @@ public class MessageStore {
      List<Message> conversationMessages = getMessagesInConversation(deleteMessage.getConversationId(), userId);
     // if (deleteMessage.getAuthorId().equals(userId)){
       for (Message message : conversationMessages){
+        System.out.println("\n\n\nMessage.getID() "+message.getId()+"\n\n\n");
+        System.out.println("\n\n\nDeleteMessage.getID() "+deleteMessage.getId()+"\n\n\n");
         if (message.getId().equals(deleteMessage.getId())){
           deleteMessage.addDeleteForUser(userId);
 
@@ -143,7 +145,10 @@ public class MessageStore {
   /** Find and return the Message with the given title. */
   public Message getMessageWithId(String messageId) {
     for (Message message : messages) {
-      if (message.getId().equals(messageId)) {
+      System.out.println("\n\n\nMessage.getID()"+message.getId()+"messageid\n\n\n");
+      System.out.println("\n\n\nMessage ID"+messageId+"messageID\n\n\n");
+      String messageString = message.getId().toString();
+      if (messageString.equals(messageId)) {
         return message;
       }
     }
