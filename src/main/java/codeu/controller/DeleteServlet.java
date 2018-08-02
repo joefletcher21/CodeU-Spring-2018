@@ -134,6 +134,7 @@ public class DeleteServlet extends HttpServlet {
 
     String requestUrl = request.getRequestURI();
     String messageId = requestUrl.substring("/delete/".length());
+    System.out.println("/n/n/n messagedId" + messageId + "/n/n/n");
     UUID userId = user.getId();
 
     Message message = messageStore.getMessageWithId(messageId);
