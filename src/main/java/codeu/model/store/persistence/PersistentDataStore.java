@@ -173,6 +173,7 @@ public class PersistentDataStore {
     messageEntity.setProperty("author_uuid", message.getAuthorId().toString());
     messageEntity.setProperty("content", message.getContent());
     messageEntity.setProperty("creation_time", message.getCreationTime().toString());
+    messageEntity.setProperty("deleteUsers", message.getDeleteForUser());
     datastore.put(messageEntity);
   }
 
