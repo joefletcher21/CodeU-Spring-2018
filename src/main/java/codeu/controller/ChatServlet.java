@@ -91,7 +91,6 @@ public class ChatServlet extends HttpServlet {
     Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
     if (conversation == null) {
       // couldn't find conversation, redirect to conversation list
-      System.out.println("Conversation was null: " + conversationTitle);
       response.sendRedirect("/conversations");
       return;
     }
@@ -100,10 +99,6 @@ public class ChatServlet extends HttpServlet {
     String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
     UUID userId = user.getId();
-
-    System.out.println("\n \n \n  USER ID in ChatSerlet "+userId+ "\n \n \n ");
-
-    System.out.println("\n \n \n  Conversation ID in ChatSerlet "+conversationId+ "\n \n \n ");
 
     List<Message> messages = messageStore.getMessagesInConversation(conversationId,userId);
 

@@ -22,17 +22,18 @@
 <body>
 
   <nav>
-    <a id="navTitle" href="/">The Chat in the Hat</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-      <a href="/conversations">Conversations</a>
-      <a href="/profile">Profile</a>
-      <a href="/admin">Admin</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %>
-    <a href="/about.jsp">About</a>
-  </nav>
+  <a id="navTitle" href="/">The Chat in the Hat</a>
+  <% if(request.getSession().getAttribute("user") != null){ %>
+    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
+    <a href="/conversations">Conversations</a>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
+    <a href="/admin">Admin</a>
+  <% } else{ %>
+    <a href="/login">Login</a>
+    <a href="/conversations">Conversations</a>
+  <% } %>
+  <a href="/about.jsp">About</a>
+</nav>
 
   <div id="container">
     <div
@@ -50,9 +51,7 @@
             create or join a conversation.</li>
 
         <li>View the <a href="/profile">profile</a> page to learn more
-        about the user.</li>
-        <li>Check out the <a href="/activityfeed">activity</a> page to  view the
-        activity happening in every conversation.</li> <% } %>
+        about the user.</li> <% } %>
       </ul>
     </div>
   </div>

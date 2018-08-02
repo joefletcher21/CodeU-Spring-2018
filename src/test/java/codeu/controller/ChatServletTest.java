@@ -91,18 +91,13 @@ public class ChatServletTest {
         creation,
         isAdmin,
         aboutMe);
-    System.out.println("\n \n \n IN THE CHAT SERVLET TEST PRINTING THE USER: "+user+ " \n\n\n");
 
     // PersistentStorageAgent mockPersistentStorageAgent;
     // mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
     //UserStore userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
     Mockito.when(mockUserStore.getUser("test_username")).thenReturn(user);
-    System.out.println("\n \n \n  ALL USER in ChatSerlet TEST "+mockUserStore.getAllUsers()+ "\n \n \n ");
 
     User FAKEUSER = mockUserStore.getUser(id);
-    System.out.println("\n \n \n  FAKE USER in ChatSerlet TEST "+FAKEUSER+ "\n \n \n ");
-
-
 
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");
 

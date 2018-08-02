@@ -93,7 +93,6 @@ public class DeleteServlet extends HttpServlet {
     Message message = messageStore.getMessageWithId(messageId);
     if (message == null) {
       // couldn't find conversation, redirect to conversation list
-      System.out.println("Message was null: " + messageId);
       response.sendRedirect("/conversations");
       return;
     }
@@ -134,7 +133,6 @@ public class DeleteServlet extends HttpServlet {
 
     String requestUrl = request.getRequestURI();
     String messageId = requestUrl.substring("/delete/".length());
-    //System.out.println("/n/n/n messagedId" + messageId + "/n/n/n");
     UUID userId = user.getId();
 
     Message message = messageStore.getMessageWithId(messageId);
