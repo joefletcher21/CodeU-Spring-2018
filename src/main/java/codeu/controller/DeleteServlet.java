@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Servlet class responsible for the chat page. */
-public class ChatServlet extends HttpServlet {
+/** Servlet class responsible for the delete. */
+public class DeleteServlet extends HttpServlet {
 
   /** Store class that gives access to Conversations. */
   private ConversationStore conversationStore;
@@ -86,21 +85,22 @@ public class ChatServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
-    String conversationTitle = requestUrl.substring("/chat/".length());
+    String messageId = requestUrl.substring("/delete/".length());
+    String username = (String) request.getSession().getAttribute("user");
+    User user = userStore.getUser(username);
+    UUID userId = user.getId();
 
-    Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    if (conversation == null) {
+    Message message = messageStore.getMessageWithId(messageId);
+    if (message == null) {
       // couldn't find conversation, redirect to conversation list
       response.sendRedirect("/conversations");
       return;
     }
 
-    UUID conversationId = conversation.getId();
-    String username = (String) request.getSession().getAttribute("user");
-    User user = userStore.getUser(username);
-    UUID userId = user.getId();
+    UUID conversationId = message.getConversationId();
+    Conversation conversation = conversationStore.getConversationWithId(conversationId);
 
-    List<Message> messages = messageStore.getMessagesInConversation(conversationId,userId);
+    List<Message> messages = messageStore.getMessagesInConversation(conversationId, userId);
 
     request.setAttribute("conversation", conversation);
     request.setAttribute("messages", messages);
@@ -132,33 +132,26 @@ public class ChatServlet extends HttpServlet {
     }
 
     String requestUrl = request.getRequestURI();
-    String conversationTitle = requestUrl.substring("/chat/".length());
+    String messageId = requestUrl.substring("/delete/".length());
+    UUID userId = user.getId();
 
-    Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    if (conversation == null) {
-      // couldn't find conversation, redirect to conversation list
-      response.sendRedirect("/conversations");
+    Message message = messageStore.getMessageWithId(messageId);
+    if (message == null) {
+      // couldn't find message
+      response.sendRedirect("/login");
       return;
     }
+    // add if else to deal with notifications
+    boolean deleteMessage = messageStore.deleteUserMessage(userId, message);
+    if (deleteMessage) {
+      response.sendRedirect("/delete/" +  messageId);
+      return;
 
-    String messageContent = request.getParameter("message");
-
-
-    // this removes any HTML from the message content
-    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.basic());
-    HashSet<UUID> deleteHash = new HashSet<UUID>();
-    Message message =
-        new Message(
-            UUID.randomUUID(),
-            conversation.getId(),
-            user.getId(),
-            messageContent,
-            Instant.now(),
-            deleteHash);
-
-    messageStore.addMessage(message);
-
+    }else{
+      response.sendRedirect("/login");
+      return;
+    }
     // redirect to a GET request
-    response.sendRedirect("/chat/" + conversationTitle);
+
   }
 }

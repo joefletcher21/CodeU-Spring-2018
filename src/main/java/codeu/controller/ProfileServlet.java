@@ -57,11 +57,8 @@ public class ProfileServlet extends HttpServlet {
   throws IOException, ServletException {
     String requestUrl = request.getRequestURI();
     int indexOfUser = requestUrl.indexOf("/users/");
-    // if (indexOfUser >= 0){
-    System.out.println("index of user: "+indexOfUser);
     String usernameUrl = requestUrl.substring(indexOfUser+"/users/".length(),
       requestUrl.length());
-    System.out.println("name of user: "+usernameUrl);
     User currentUser = userStore.getUser(usernameUrl);
 
     String aboutCurrentUser;
@@ -76,17 +73,12 @@ public class ProfileServlet extends HttpServlet {
     List<Message> currentUserMessages = new ArrayList<Message>();
     if (currentUser != null){
       currentUserMessages = messageStore.getUserMessages( currentUser.getId());
-      System.out.println("in the null if statement");
     }
 
-    System.out.println(currentUserMessages.size());
     request.setAttribute("about", aboutCurrentUser);
     request.setAttribute("messages", currentUserMessages);
     request.setAttribute("ownerUser", usernameUrl);
     request.setAttribute("currentUser", currentUser);
-    // request.setAttribute("username", request.getRemoteUser ());
-    // System.out.println("username get aram: "+request.getRemoteUser ());
-
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
 
   }
@@ -100,19 +92,15 @@ public class ProfileServlet extends HttpServlet {
     if (username == null) {
       // user is not logged in, don't let them create a conversation
       response.sendRedirect("/login");
-      System.out.println("In the first if: username ==null");
       return;
     }
 
     User ownerUser = userStore.getUser(username);
     if (ownerUser == null) {
       // user was not found, don't let them create a conversation
-      System.out.println("User not found: " + username);
-      System.out.println("In the second if: user ==null");
       response.sendRedirect("/login");
       return;
     }
-    System.out.println("didnt go in nulls and in POST");
 
     String aboutMeContent = (String)request.getParameter("about");
     String cleanedAboutMeContent = Jsoup.clean(aboutMeContent, Whitelist.none());

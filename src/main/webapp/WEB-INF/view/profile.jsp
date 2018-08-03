@@ -27,20 +27,18 @@ limitations under the License.
     <body>
 
       <nav>
-        <a id="navTitle" href="/">The Chat in the Hat</a>
-        <% if(request.getSession().getAttribute("user") != null){ %>
-        <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-        <% } else{ %>
-        <a href="/login">Login</a>
-        <% } %>
-        <a href="/conversations">Conversations</a>
-        <a href="/about.jsp">About</a>
-        <% if(request.getAttribute("ownerUser") != null){ %>
-        <a href="/users/<%=request.getAttribute("ownerUser")%>">Profile</a>
-        <% }  %>
-        <a href="/activityfeed">Activity</a>
-        <a href="/admin">Admin</a>
-      </nav>
+  <a id="navTitle" href="/">The Chat in the Hat</a>
+  <% if(request.getSession().getAttribute("user") != null){ %>
+    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
+    <a href="/conversations">Conversations</a>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
+    <a href="/admin">Admin</a>
+  <% } else{ %>
+    <a href="/login">Login</a>
+    <a href="/conversations">Conversations</a>
+  <% } %>
+  <a href="/about.jsp">About</a>
+</nav>
 
       <div id="container">
         <div

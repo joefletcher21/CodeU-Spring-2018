@@ -22,20 +22,18 @@
 <body>
 
   <nav>
-    <a id="navTitle" href="/">The Chat in the Hat</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %>
+  <a id="navTitle" href="/">The Chat in the Hat</a>
+  <% if(request.getSession().getAttribute("user") != null){ %>
+    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <a href="/conversations">Conversations</a>
-    <a href="/about.jsp">About</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
-    <% }  %>
-    <a href="/activityfeed">Activity</a>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
     <a href="/admin">Admin</a>
-  </nav>
+  <% } else{ %>
+    <a href="/login">Login</a>
+    <a href="/conversations">Conversations</a>
+  <% } %>
+  <a href="/about.jsp">About</a>
+</nav>
 
   <div id="container">
     <div

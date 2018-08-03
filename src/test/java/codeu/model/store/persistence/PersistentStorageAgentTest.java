@@ -5,6 +5,7 @@ import codeu.model.data.Message;
 import codeu.model.data.User;
 import java.time.Instant;
 import java.util.UUID;
+import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -52,7 +53,8 @@ public class PersistentStorageAgentTest {
             "test_username",
             "$2a$10$5GNCbSPS1sqqM9.hdiE2hexn1w.vnNoR.CaHIztFEhdAD7h82tqX.",
             Instant.now(),
-            false);
+            false,
+            "Test user's about me section");
     persistentStorageAgent.writeThrough(user);
     Mockito.verify(mockPersistentDataStore).writeThrough(user);
   }
@@ -67,9 +69,10 @@ public class PersistentStorageAgentTest {
 
   @Test
   public void testWriteThroughMessage() {
+    HashSet<UUID> testHash = new HashSet<UUID>();
     Message message =
         new Message(
-            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", Instant.now());
+            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", Instant.now(),testHash);
     persistentStorageAgent.writeThrough(message);
     Mockito.verify(mockPersistentDataStore).writeThrough(message);
   }

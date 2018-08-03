@@ -68,8 +68,8 @@ public class RegisterServlet extends HttpServlet {
     if (username.matches("blair")){
       admin= true;
     }
-
-    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), admin);
+    String aboutMeOriginal = "";
+    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), admin, aboutMeOriginal);
     userStore.addUser(user);
 
     response.sendRedirect("/login");

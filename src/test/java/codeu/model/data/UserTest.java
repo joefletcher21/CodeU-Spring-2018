@@ -28,13 +28,15 @@ public class UserTest {
     String passwordHash = "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy";
     Instant creation = Instant.now();
     boolean isAdmin= false;
+    String aboutMe = "Test user's about me section";
 
-    User user = new User(id, name, passwordHash, creation, isAdmin);
+    User user = new User(id, name, passwordHash, creation, isAdmin, aboutMe);
 
     Assert.assertEquals(id, user.getId());
     Assert.assertEquals(name, user.getName());
     Assert.assertEquals(passwordHash, user.getPasswordHash());
     Assert.assertEquals(creation, user.getCreationTime());
     Assert.assertEquals(isAdmin, user.getIsAdmin());
+    Assert.assertEquals(aboutMe, user.getAboutMe());
   }
 }

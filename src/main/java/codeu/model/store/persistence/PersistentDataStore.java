@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.HashSet;
 
 /**
  * This class handles all interactions with Google App Engine's Datastore service. On startup it
@@ -68,7 +69,8 @@ public class PersistentDataStore {
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         boolean isAdmin = Boolean.parseBoolean((String)entity.getProperty("isAdmin"));
-        User user = new User(uuid, userName, passwordHash, creationTime, isAdmin);
+        String aboutMe = (String) entity.getProperty("aboutMe");
+        User user = new User(uuid, userName, passwordHash, creationTime, isAdmin, aboutMe);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -137,7 +139,8 @@ public class PersistentDataStore {
         UUID authorUuid = UUID.fromString((String) entity.getProperty("author_uuid"));
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         String content = (String) entity.getProperty("content");
-        Message message = new Message(uuid, conversationUuid, authorUuid, content, creationTime);
+        HashSet<UUID> hashSet = new HashSet<UUID>();
+        Message message = new Message(uuid, conversationUuid, authorUuid, content, creationTime, hashSet);
         messages.add(message);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -158,6 +161,7 @@ public class PersistentDataStore {
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
     userEntity.setProperty("isAdmin", String.valueOf(user.getIsAdmin()));
+    userEntity.setProperty("aboutMe", user.getAboutMe());
     datastore.put(userEntity);
   }
 
@@ -169,6 +173,7 @@ public class PersistentDataStore {
     messageEntity.setProperty("author_uuid", message.getAuthorId().toString());
     messageEntity.setProperty("content", message.getContent());
     messageEntity.setProperty("creation_time", message.getCreationTime().toString());
+    messageEntity.setProperty("deleteUsers", message.getDeleteForUser());
     datastore.put(messageEntity);
   }
 

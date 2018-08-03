@@ -22,19 +22,18 @@
 <body>
 
   <nav>
-    <a id="navTitle" href="/">The Chat in the Hat</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %>
+  <a id="navTitle" href="/">The Chat in the Hat</a>
+  <% if(request.getSession().getAttribute("user") != null){ %>
+    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <a href="/conversations">Conversations</a>
-    <a href="/about.jsp">About</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
-    <% }  %>
-    <a href="/activityfeed">Activity</a>
-  </nav>
+    <a href="/users/<%=request.getSession().getAttribute("user")%>">Profile</a>
+    <a href="/admin">Admin</a>
+  <% } else{ %>
+    <a href="/login">Login</a>
+    <a href="/conversations">Conversations</a>
+  <% } %>
+  <a href="/about.jsp">About</a>
+</nav>
 
   <div id="container">
     <div
@@ -45,14 +44,14 @@
 
       <ul>
         <li><a href="/login">Login</a> to get started.</li>
-        <li>Go to the <a href="/conversations">conversations</a> page to
-            create or join a conversation.</li>
         <li>View the <a href="/about.jsp">about</a> page to learn more about the
             project.</li>
+        <% if(request.getSession().getAttribute("user") != null){ %>
+        <li>Go to the <a href="/conversations">conversations</a> page to
+            create or join a conversation.</li>
+
         <li>View the <a href="/profile">profile</a> page to learn more
-        about the user.</li>
-        <li>Check out the <a href="/activityfeed">activity</a> page to  view the
-        activity happening in every conversation.</li>
+        about the user.</li> <% } %>
       </ul>
     </div>
   </div>
